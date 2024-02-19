@@ -12,9 +12,11 @@ https://newsdata.io/api/1/news?apikey=DIN_NYCKEL&q=pizza
 
 const myAPI_KEY = "pub_382120086c1799d089c0da41a4c9ee4d8a9ec"; // 200 hämtningar per dag?
 
+
+
 export async function getStaticProps() {
   const res = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=pizza` // TODO: ändra pizza till allmäna nyheter? eller hämta alla nyheter och sen spara olika kategorier i olika arrayer?
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=politics` // ska politics vara en variabel så vi kan återanvända denna komponent? eller gör vi nya komponenter för varje kategori? 
   );
   const data = await res.json();
 
@@ -27,7 +29,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function News( {news} ) {
+export default function CategoryNews( {news} ) {
   const { state, dispatch } = useContext(BookMarkContext);
 
   function addBookmark(article) {
@@ -62,7 +64,7 @@ export default function News( {news} ) {
         ))} 
       </p>
       <ul>
-        {news.map(article => (
+        {news.map(article => ( 
             <li key={article.article_id}  >
               <button onClick={() => (
                 addBookmark(article)

@@ -10,6 +10,7 @@ export default function App({ Component, pageProps }) {
 
         <Link href={"news"}>News</Link>
         <Link href={"BookMarks"}>Bookmark</Link>
+        <Link href={"Politics"}>Politics</Link>
         <Component {...pageProps} />
 
       </BookMarkProvider>
