@@ -62,7 +62,7 @@ export default function News( {news} ) {
         ))} 
       </p>
       <ul>
-        {news.map(article => (
+        {news.map(article => ( 
             <li key={article.article_id}  >
               <button onClick={() => (
                 addBookmark(article)
