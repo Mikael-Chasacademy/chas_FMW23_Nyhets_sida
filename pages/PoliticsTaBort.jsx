@@ -19,18 +19,11 @@ export async function getStaticProps() {
     `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=politics` // ska politics vara en variabel så vi kan återanvända denna komponent? eller gör vi nya komponenter för varje kategori? 
   );
 
-  
-  /* const res2 = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=tech` // ska politics vara en variabel så vi kan återanvända denna komponent? eller gör vi nya komponenter för varje kategori? 
-  ); */
-
   const data = await res.json();
-  // const data2 = await res2.json();
 
   return {
     props: { 
       news: data.results,
-      // tech: data2.results,
     },
 
     revalidate: 10,
@@ -38,7 +31,7 @@ export async function getStaticProps() {
 }
 
 
-export default function CategoryNews( {news}, {tech}) {
+export default function CategoryNews( {news} ) {
   const { state, dispatch } = useContext(BookMarkContext);
 
   function addBookmark(article) {
