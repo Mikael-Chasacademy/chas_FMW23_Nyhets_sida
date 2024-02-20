@@ -66,20 +66,24 @@ export default function BookMarks({ news, tech, politics }) {
   }
 
   return (
-    <div>
+    <div className="bg-green-500 dark:bg-red-500">
       <p>Saved articles:</p>
       {state.bookmarks.map(bookmark => (
         <span key={bookmark.id}> {bookmark.id}</span>
       ))}
-      {filteredArticles.map(article => (
-        <li key={article.article_id}>
-          <button onClick={() => (
-                deleteBookmark(article)
-                )}>Delete Bookmark</button>
-          <Link href={`/article/${article.article_id}`}><h2>{article.title}</h2></Link>
-          <img src={article.image_url} alt="" />
-        </li>
-      ))}
+      <ul className="grid grid-cols-2 gap-4">
+
+        {filteredArticles.map(article => (
+          <li key={article.article_id}>
+            <button onClick={() => (
+                  deleteBookmark(article)
+                  )}>Delete Bookmark</button>
+            <Link href={`/article/${article.article_id}`}><h2>{article.title}</h2></Link>
+            <img src={article.image_url} alt="" />
+          </li>
+        ))}
+      </ul>
+
     </div>
   );
 }

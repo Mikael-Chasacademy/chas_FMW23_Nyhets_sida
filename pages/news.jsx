@@ -51,7 +51,7 @@ export default function News( {news} ) {
   }
 
   return (
-    <div>
+    <div className="">
       <button onClick={() => (
                 clearBookmarks()
                 )}>Clear All Bookmarks</button>
