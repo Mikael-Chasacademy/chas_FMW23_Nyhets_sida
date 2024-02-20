@@ -1,6 +1,8 @@
 // pages/[category].js
 import Link from "next/link";
 import { fetchDataByCategory } from "./api";
+import { useContext } from "react";
+import { BookMarkContext } from "@/BookMarkContext";
 
 export async function getStaticPaths() {
   // Here you define the categories for which you want to generate dynamic routes
@@ -27,6 +29,22 @@ export async function getStaticProps({ params }) {
 }
 
 export default function CategoryPage({ news }) {
+  const { state, dispatch } = useContext(BookMarkContext);
+
+  function addBookmark(article) {
+    dispatch( {
+      type: "add",
+      id: article.article_id,
+    })
+  }
+
+  function deleteBookmark(article) {
+    dispatch( {
+      type: "delete",
+      id: article.article_id,
+    })
+  }
+
   return (
     <div>
       {/* <h1>Category: {news.length > 0 ? news[0].category : "Unknown"}</h1> */}
@@ -40,7 +58,7 @@ export default function CategoryPage({ news }) {
                 deleteBookmark(article)
                 )}>Delete Bookmark</button>
               <Link href={`/article/${article.article_id}`}><h2>{article.title}</h2></Link>
-              <img src={article.image_url} alt="" /> {/* // hittar vad saker heter i det vi fetchade */}
+              <img src={article.image_url} alt="" />
             </li>
           )
         )}

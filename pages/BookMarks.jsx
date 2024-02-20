@@ -5,14 +5,14 @@ import { fetchDataByCategory } from "./api";
 
 const myAPI_KEY = "pub_382120086c1799d089c0da41a4c9ee4d8a9ec"; // 200 hämtningar per dag?
 
-export async function getStaticPaths() {
+/* export async function getStaticPaths() {
   const categories = ["politics", "technology", "pizza"]; // Add more categories as needed
   const paths = categories.map(category => ({ params: { category: category } }));
   return { paths, fallback: false };
-}
+} */
 
 export async function getStaticProps() {
-  /* const pizzaRes = await fetch(
+  const pizzaRes = await fetch(
     `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=pizza`
   );
   const pizzaData = await pizzaRes.json();
@@ -25,15 +25,15 @@ export async function getStaticProps() {
   const politicsRes = await fetch(
     `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=politics`
   );
-  const politicsData = await politicsRes.json(); */
+  const politicsData = await politicsRes.json();
 
-  const { category } = params;
+  /* const { category } = params;
   const news = await fetchDataByCategory(category);
   return {
     props: { news },
     revalidate: 10,
   };
-  /*
+   */
   return {
     props: {
       
@@ -42,21 +42,21 @@ export async function getStaticProps() {
       politics: politicsData.results,
     },
   };
-  */
+ 
 }
 
-//export default function BookMarks({ news, tech, politics }) {
-export default function BookMarks({ news }) {
+export default function BookMarks({ news, tech, politics }) {
+//export default function BookMarks({ news }) {
   const { state, dispatch } = useContext(BookMarkContext);
 
-   /* const combinedData = [...news, ...tech, ...politics];
+  const combinedData = [...news, ...tech, ...politics];
 
  const filteredArticles = combinedData.filter(article =>
     state.bookmarks.find(bookmark => bookmark.id === article.article_id) // find är bra då den stannar efter den hittat matchande id. Bra ifall vi bookmarkat något flera gånger
-  ); */
-  const filteredArticles = news.filter(article =>
+  ); 
+  /* const filteredArticles = news.filter(article =>
     state.bookmarks.find(bookmark => bookmark.id === article.article_id) // find är bra då den stannar efter den hittat matchande id. Bra ifall vi bookmarkat något flera gånger
-  );
+  ); */
 
   function deleteBookmark(article) {
     dispatch( {
