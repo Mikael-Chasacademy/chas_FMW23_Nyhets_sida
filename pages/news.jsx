@@ -78,8 +78,9 @@ export default function News({ mainNews, rightSideNews, leftSideNews }) {
                   <li
                     style={{
                       display: "flex",
+                      marginBottom: "20px",
                       flexDirection: "column",
-                      borderBottom: index > 1 ? "0.5px solid black" : "",
+                      borderBottom: index < 2 ? "0.5px solid black" : null,
                     }}
                     key={article.article_id}
                   >
@@ -199,7 +200,7 @@ export default function News({ mainNews, rightSideNews, leftSideNews }) {
                     flexDirection: "column",
                     // alignItems: "center",
                     marginBottom: "10px",
-                    borderBottom: "0.5px solid black",
+                    borderBottom: index < 3 ? "0.5px solid black" : null,
                   }}
                   key={article.article_id}
                 >
@@ -256,7 +257,7 @@ export default function News({ mainNews, rightSideNews, leftSideNews }) {
                   style={{
                     display: "flex",
                     flexDirection: "column",
-                    borderBottom: "0.5px solid black",
+                    borderBottom: index < 1 ? "0.5px solid black" : null,
                     // alignItems: "start",
                   }}
                   key={article.article_id}

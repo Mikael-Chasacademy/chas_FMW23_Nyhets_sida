@@ -42,11 +42,11 @@ import { useEffect } from "react";
   )
  } */
 
- const DIN_API_NYCKEL = "pub_382120086c1799d089c0da41a4c9ee4d8a9ec";
+const myAPI_KEY = "pub_3826420aa772faa6db69797ad33ddda8dd802";
 
 export async function getStaticPaths() {
   const res = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${DIN_API_NYCKEL}&q=pizza`
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=pizza`
   );
   const data = await res.json();
 
@@ -61,7 +61,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const res = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${DIN_API_NYCKEL}&q=pizza`
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=pizza`
   );
   const data = await res.json();
 
