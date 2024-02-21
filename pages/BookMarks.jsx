@@ -2,6 +2,7 @@ import { BookMarkContext } from "@/BookMarkContext";
 import { useContext } from "react";
 import Link from "next/link";
 import { fetchDataByCategory } from "./api";
+import Image from "next/image";
 
 const myAPI_KEY = "pub_382120086c1799d089c0da41a4c9ee4d8a9ec"; // 200 hämtningar per dag?
 
@@ -10,6 +11,7 @@ const myAPI_KEY = "pub_382120086c1799d089c0da41a4c9ee4d8a9ec"; // 200 hämtninga
   const paths = categories.map(category => ({ params: { category: category } }));
   return { paths, fallback: false };
 } */
+
 
 export async function getStaticProps() {
   const pizzaRes = await fetch(
@@ -65,6 +67,12 @@ export default function BookMarks({ news, tech, politics }) {
     })
   }
 
+
+  // Define a custom loader function for external images
+/*   const myLoader = ({ src, width, quality }) => {
+    return `${src}?w=${width}&q=${quality || 75}`;
+  }; */
+
   return (
     <div className="bg-green-500 dark:bg-red-500">
       <p>Saved articles:</p>
@@ -79,7 +87,16 @@ export default function BookMarks({ news, tech, politics }) {
                   deleteBookmark(article)
                   )}>Delete Bookmark</button>
             <Link href={`/article/${article.article_id}`}><h2>{article.title}</h2></Link>
-            <img src={article.image_url} alt="" />
+            {console.log(article.image_url)}
+         <img src={article.image_url} alt="" /> 
+         {/* <Image 
+          loader={myLoader}
+          src={article.image_url} 
+          alt={article.title} 
+          width={400} 
+          height={400} 
+        /> */}
+
           </li>
         ))}
       </ul>
@@ -87,3 +104,5 @@ export default function BookMarks({ news, tech, politics }) {
     </div>
   );
 }
+
+// hej
