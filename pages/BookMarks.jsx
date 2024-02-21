@@ -101,6 +101,7 @@ export default function BookMarks({ news, tech, politics }) {
         ))}
       </ul>
 
+        {/* {"hallå"} */}
     </div>
   );
 }
