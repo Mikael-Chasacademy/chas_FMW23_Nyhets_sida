@@ -42,7 +42,7 @@ import { useEffect } from "react";
   )
  } */
 
- const DIN_API_NYCKEL = "pub_382120086c1799d089c0da41a4c9ee4d8a9ec";
+ const DIN_API_NYCKEL = "pub_38305e955fd48635fc6aea34d9011d6189f5a";
 
 export async function getStaticPaths() {
   const res = await fetch(
