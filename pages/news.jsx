@@ -284,6 +284,7 @@ export default function News({ mainNews, rightSideNews, leftSideNews }) {
                         // color: "black",
                         textDecoration: "none",
                       }}
+                      // hejhejejhhjeehjhejehjhej
                     >
                       {article.title}
                     </h2>
