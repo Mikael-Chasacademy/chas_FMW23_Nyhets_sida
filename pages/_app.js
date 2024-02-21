@@ -41,13 +41,16 @@ function MyApp({ Component, pageProps }) {
           <ScrollToTop/>
           <Link href={"news"}>News</Link>
           {" "}
-          <Link href={"BookMarks"}>Bookmark</Link>
-          {/* <Link href={"PoliticsTaBort"}>Politics</Link> */}
-          {" "}
-          <Link href={"/politics"}>Politics</Link>
+            <Link href={"/politics"}>Politics</Link>
           {" "}
           <Link href={"/technology"}>Technology</Link>
           {" "}
+          <Link href={"/sports"}>Sports</Link>
+          
+          <Link href={"BookMarks"}>Bookmark</Link>
+          {/* <Link href={"PoliticsTaBort"}>Politics</Link> */}
+          {" "}
+        
           
         </div>
         <ThemeButton></ThemeButton>

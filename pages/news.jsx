@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const myAPI_KEY = "pub_3826420aa772faa6db69797ad33ddda8dd802";
+const myAPI_KEY = "pub_38305e955fd48635fc6aea34d9011d6189f5a";
 
 export async function getStaticProps() {
   const mainRes = await fetch(
@@ -284,9 +284,6 @@ export default function News({ mainNews, rightSideNews, leftSideNews }) {
                         // color: "black",
                         textDecoration: "none",
                       }}
-                      // hejhejejhhjeehjhejehjhej
-                      ///DÅDÅDÅDÅDÅ
-                      // hej igen
                     >
                       {article.title}
                     </h2>
