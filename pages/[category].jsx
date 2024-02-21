@@ -6,7 +6,7 @@ import { BookMarkContext } from "@/BookMarkContext";
 
 export async function getStaticPaths() {
   // Here you define the categories for which you want to generate dynamic routes
-  const categories = ["politics", "technology"];
+  const categories = ["politics", "technology", "sports"];
   
   // Generate paths for each category
   const paths = categories.map(category => ({

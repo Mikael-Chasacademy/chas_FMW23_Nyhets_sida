@@ -65,17 +65,26 @@ export default function BookMarks({ news, tech, politics }) {
     });
   }
 
+  function clearBookmarks() {
+    dispatch({
+      type: "clear"
+    })
+  }
+
   // Define a custom loader function for external images
   /*   const myLoader = ({ src, width, quality }) => {
     return `${src}?w=${width}&q=${quality || 75}`;
   }; */
 
   return (
-    <div className="bg-green-500 dark:bg-red-500">
+    <div className="">
       <p>Saved articles:</p>
       {state.bookmarks.map((bookmark) => (
         <span key={bookmark.id}> {bookmark.id}</span>
       ))}
+      <button onClick={() => {
+        clearBookmarks()
+      }}>Clear All Bookmarks</button>
       <ul className="grid grid-cols-2 gap-4">
         {filteredArticles.map((article) => (
           <li key={article.article_id}>
