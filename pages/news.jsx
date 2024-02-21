@@ -1,81 +1,297 @@
 import Link from "next/link";
 
-import { data } from "autoprefixer"; // ?
-import { useContext, useEffect, useState } from "react";
-import { BookMarkContext } from "@/BookMarkContext";
-
-// https://newsdata.io/api-key
-/* 
-kan gå in på länken nedanför för att se APIt
-https://newsdata.io/api/1/news?apikey=DIN_NYCKEL&q=pizza
- */
-
-const myAPI_KEY = "pub_382120086c1799d089c0da41a4c9ee4d8a9ec"; // 200 hämtningar per dag?
+const myAPI_KEY = "pub_3826420aa772faa6db69797ad33ddda8dd802";
 
 export async function getStaticProps() {
-  const res = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=pizza` // TODO: ändra pizza till allmäna nyheter? eller hämta alla nyheter och sen spara olika kategorier i olika arrayer?
+  const mainRes = await fetch(
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=se&language=sv&category=top`
   );
-  const data = await res.json();
+  const mainData = await mainRes.json();
+
+  const politicsRes = await fetch(
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=se&language=sv&category=politics`
+  );
+  const politicsData = await politicsRes.json();
+
+  const technologyRes = await fetch(
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=se&language=sv&category=technology`
+  );
+  const technologyData = await technologyRes.json();
 
   return {
-    props: { 
-      news: data.results,
+    props: {
+      mainNews: mainData.results,
+      rightSideNews: politicsData.results,
+      leftSideNews: technologyData.results,
     },
 
     revalidate: 10,
   };
 }
 
-export default function News( {news} ) {
-  const { state, dispatch } = useContext(BookMarkContext);
-
-  function addBookmark(article) {
-    dispatch( {
-      type: "add",
-      id: article.article_id,
-    })
-  }
-
-  function deleteBookmark(article) {
-    dispatch( {
-      type: "delete",
-      id: article.article_id,
-    })
-  }
-
-  function clearBookmarks() {
-    dispatch( {
-      type: "clear",
-    })
-  }
+export default function News({ mainNews, rightSideNews, leftSideNews }) {
+  console.log(mainNews);
+  console.log(rightSideNews);
+  console.log(leftSideNews);
 
   return (
-    <div className="">
-      <button onClick={() => (
-                clearBookmarks()
-                )}>Clear All Bookmarks</button>
-      <p>saved articles: 
-        {/* // state.bookmarks by itself doesnt work apparently, error */}
-       {state.bookmarks.map(bookmark => ( // mappar igenom istället
-          <span key={bookmark.id}> {bookmark.id}</span> 
-        ))} 
-      </p>
-      <ul>
-        {news.map(article => ( 
-            <li key={article.article_id}  >
-              <button onClick={() => (
-                addBookmark(article)
-                )}>Add Bookmark</button> {/* // skickar hela article objektet ifall vi vill komma åt mer än bara id sen? */}
-                <button onClick={() => (
-                deleteBookmark(article)
-                )}>Delete Bookmark</button>
-              <Link href={`/article/${article.article_id}`}><h2>{article.title}</h2></Link>
-              <img src={article.image_url} alt="" /> {/* // hittar vad saker heter i det vi fetchade */}
-            </li>
-          )
-        )}
-      </ul>
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(12, 1fr)",
+        // gap: "20px",
+        marginTop: "100px",
+        // color: "black",
+        padding: "20px",
+        // backgroundColor: "red",
+        width: "100%",
+      }}
+    >
+      <div
+        style={{
+          gridColumn: "3 / span 9",
+          gridRow: "1",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          paddingRight: "20px",
+          paddingLeft: "20px",
+          // backgroundColor: "blue",
+          width: "80%",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+            // backgroundColor: "yellow",
+            width: "80%",
+          }}
+        >
+          <ul id="MAIN1" style={{ listStyleType: "none", padding: 0 }}>
+            {mainNews &&
+              mainNews
+                .filter((article, index) => article.image_url && index < 2)
+                .map((article, index) => (
+                  <li
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      borderBottom: index > 1 ? "0.5px solid black" : "",
+                    }}
+                    key={article.article_id}
+                  >
+                    <div>
+                      {article.image_url && (
+                        <img
+                          style={{
+                            height: "400px",
+                            width: "100% ",
+                          }}
+                          src={article.image_url}
+                          alt=""
+                        />
+                      )}
+                    </div>
+                    <Link
+                      style={{ textDecoration: "none" }}
+                      href={`/article/${article.article_id}`}
+                    >
+                      <h2
+                        className="text-black dark:text-white"
+                        style={{
+                          fontSize: "30px",
+                          // color: "black",
+                          textDecoration: "none",
+                        }}
+                      >
+                        {article.title}
+                      </h2>
+                    </Link>
+                  </li>
+                ))}
+          </ul>
+          <ul
+            id="MAIN2"
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              width: "100%",
+              padding: 0,
+            }}
+          >
+            {mainNews &&
+              mainNews
+                .filter(
+                  (article, index) =>
+                    article.image_url && index >= 2 && index < 5
+                )
+                .map((article, index) => (
+                  <li
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      borderBottom: "0.5px solid black",
+                    }}
+                    key={article.article_id}
+                  >
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <div>
+                        {article.image_url && (
+                          <img
+                            style={{
+                              height: "100px",
+                              width: "66%",
+                            }}
+                            src={article.image_url}
+                            alt=""
+                          />
+                        )}
+                      </div>
+                      <Link
+                        style={{ textDecoration: "none", width: "100%" }}
+                        href={`/article/${article.article_id}`}
+                      >
+                        <h2
+                          className="text-black dark:text-white"
+                          style={{
+                            fontSize: "20px",
+                            // color: "black",
+                          }}
+                        >
+                          {article.title}
+                        </h2>
+                      </Link>
+                    </div>
+                  </li>
+                ))}
+          </ul>
+        </div>
+      </div>
+
+      <div
+        style={{
+          gridColumn: "10 / span 3",
+          gridRow: "1",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <ul
+          style={{
+            textDecoration: "none",
+            // width: "100%",
+            alignItems: "center",
+            listStyleType: "none",
+            padding: 0,
+          }}
+        >
+          {rightSideNews &&
+            rightSideNews
+              .filter((article, index) => article.image_url && index < 5)
+              .map((article, index) => (
+                <li
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    // alignItems: "center",
+                    marginBottom: "10px",
+                    borderBottom: "0.5px solid black",
+                  }}
+                  key={article.article_id}
+                >
+                  <div>
+                    {index === 0 ? (
+                      <img
+                        style={{
+                          height: "200px",
+                          width: "100%",
+                        }}
+                        src={article.image_url}
+                        alt=""
+                      />
+                    ) : null}
+                  </div>
+                  <Link
+                    style={{ textDecoration: "none" }}
+                    href={`/article/${article.article_id}`}
+                  >
+                    <h2
+                      className="text-black dark:text-white"
+                      style={{
+                        fontSize: "20px",
+                        // color: "black",
+                        textDecoration: "none",
+                      }}
+                    >
+                      {article.title}
+                    </h2>
+                  </Link>
+                </li>
+              ))}
+        </ul>
+      </div>
+      <div
+        style={{
+          gridColumn: "1 / span 3",
+          gridRow: "1",
+          display: "flex",
+          flexDirection: "column",
+
+          alignItems: "flex-start",
+          paddingRight: "20px",
+          paddingLeft: "20px",
+          // backgroundColor: "red",
+        }}
+      >
+        <ul style={{ listStyleType: "none", padding: 0 }}>
+          {leftSideNews &&
+            leftSideNews
+              .filter((article, index) => article.image_url && index < 2)
+              .map((article, index) => (
+                <li
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    borderBottom: "0.5px solid black",
+                    // alignItems: "start",
+                  }}
+                  key={article.article_id}
+                >
+                  <div>
+                    {index === 0 || index === 1 ? (
+                      <img
+                        style={{
+                          height: "200px",
+                          width: "100%",
+                        }}
+                        src={article.image_url}
+                        alt=""
+                      />
+                    ) : null}
+                  </div>
+                  <Link
+                    style={{ textDecoration: "none" }}
+                    href={`/article/${article.article_id}`}
+                  >
+                    <h2
+                      className="text-black dark:text-white"
+                      style={{
+                        fontSize: "20px",
+                        // color: "black",
+                        textDecoration: "none",
+                      }}
+                    >
+                      {article.title}
+                    </h2>
+                  </Link>
+                </li>
+              ))}
+        </ul>
+      </div>
     </div>
-  )
+  );
 }
