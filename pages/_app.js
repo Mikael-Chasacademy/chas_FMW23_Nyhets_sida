@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { ThemeProvider, useTheme, useThemeDispatch } from "../ThemeContext";
 import ThemeButton from "@/components/ThemeButton";
+import ScrollToTop from "@/ScrollToTopButton";
 
 function MyApp({ Component, pageProps }) {
   const { state } = useTheme();
@@ -37,6 +38,7 @@ function MyApp({ Component, pageProps }) {
      <BookMarkProvider>
       <div className="flex justify-between px-3">
         <div className="flex gap-3">
+          <ScrollToTop/>
           <Link href={"news"}>News</Link>
           {" "}
           <Link href={"BookMarks"}>Bookmark</Link>
