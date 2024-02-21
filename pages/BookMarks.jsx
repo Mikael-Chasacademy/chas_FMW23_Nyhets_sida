@@ -12,7 +12,6 @@ const myAPI_KEY = "pub_382120086c1799d089c0da41a4c9ee4d8a9ec"; // 200 hämtninga
   return { paths, fallback: false };
 } */
 
-
 export async function getStaticProps() {
   const pizzaRes = await fetch(
     `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=pizza`
@@ -38,74 +37,70 @@ export async function getStaticProps() {
    */
   return {
     props: {
-      
       news: pizzaData.results,
       tech: techData.results,
       politics: politicsData.results,
     },
   };
- 
 }
 
 export default function BookMarks({ news, tech, politics }) {
-//export default function BookMarks({ news }) {
+  //export default function BookMarks({ news }) {
   const { state, dispatch } = useContext(BookMarkContext);
 
   const combinedData = [...news, ...tech, ...politics];
 
- const filteredArticles = combinedData.filter(article =>
-    state.bookmarks.find(bookmark => bookmark.id === article.article_id) // find är bra då den stannar efter den hittat matchande id. Bra ifall vi bookmarkat något flera gånger
-  ); 
+  const filteredArticles = combinedData.filter(
+    (article) =>
+      state.bookmarks.find((bookmark) => bookmark.id === article.article_id) // find är bra då den stannar efter den hittat matchande id. Bra ifall vi bookmarkat något flera gånger
+  );
   /* const filteredArticles = news.filter(article =>
     state.bookmarks.find(bookmark => bookmark.id === article.article_id) // find är bra då den stannar efter den hittat matchande id. Bra ifall vi bookmarkat något flera gånger
   ); */
 
   function deleteBookmark(article) {
-    dispatch( {
+    dispatch({
       type: "delete",
       id: article.article_id,
-    })
+    });
   }
 
-
   // Define a custom loader function for external images
-/*   const myLoader = ({ src, width, quality }) => {
+  /*   const myLoader = ({ src, width, quality }) => {
     return `${src}?w=${width}&q=${quality || 75}`;
   }; */
 
   return (
     <div className="bg-green-500 dark:bg-red-500">
       <p>Saved articles:</p>
-      {state.bookmarks.map(bookmark => (
+      {state.bookmarks.map((bookmark) => (
         <span key={bookmark.id}> {bookmark.id}</span>
       ))}
       <ul className="grid grid-cols-2 gap-4">
-
-        {filteredArticles.map(article => (
+        {filteredArticles.map((article) => (
           <li key={article.article_id}>
-            <button onClick={() => (
-                  deleteBookmark(article)
-                  )}>Delete Bookmark</button>
-            <Link href={`/article/${article.article_id}`}><h2>{article.title}</h2></Link>
+            <button onClick={() => deleteBookmark(article)}>
+              Delete Bookmark
+            </button>
+            <Link href={`/article/${article.article_id}`}>
+              <h2>{article.title}</h2>
+            </Link>
             {console.log(article.image_url)}
-         <img src={article.image_url} alt="" /> 
-         {/* <Image 
+            <img src={article.image_url} alt="" />
+            {/* <Image 
           loader={myLoader}
           src={article.image_url} 
           alt={article.title} 
           width={400} 
           height={400} 
         /> */}
-
           </li>
         ))}
       </ul>
 
-        {/* {"hallå"} */}
+      {/* {"hallå"} */}
     </div>
   );
 }
 
 // hej
-
-// hallå
