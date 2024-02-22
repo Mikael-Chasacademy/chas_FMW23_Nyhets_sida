@@ -1,21 +1,50 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
 /* @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@400..700&family=Sixtyfour&display=swap'); */
 
+@font-face {
+  font-family: "Oswald";
+  src: url("/fonts/oswald.woff2") format("woff2"),
+    url("/fonts/oswald.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.oswald-regular {
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.custom-thin-border-right {
+  border-width: 1px;
+  border-bottom: 0px;
+  border-top: 0px;
+  border-left: 0px;
+  border-style: solid;
+  border-color: rgb(209 213 219);
+}
+
+.custom-thin-border-bottom {
+  border-width: 0px;
+  border-bottom: 1px;
+  border-top: 0px;
+  border-left: 0px;
+  border-style: solid;
+  border-color: rgb(209 213 219);
+}
 
 :root {
   min-width: 459px; /* check _app.js for light/dark-mode colors on the root-element */
   /* font-family: Helvetica, Arial, sans-serif;  */
- /*  font-family: system-ui;   */
- font-family: 'Inter', sans-serif;
+  /*  font-family: system-ui;   */
+  font-family: "Inter", sans-serif;
 }
-*/
-
-body {
+*/ body {
   font-size: 1rem;
+  padding: 0;
 }
-
 
 /* h1 {
   font-family: "Sixtyfour", sans-serif;

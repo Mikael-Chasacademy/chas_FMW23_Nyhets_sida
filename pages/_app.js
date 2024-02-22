@@ -41,9 +41,9 @@ function MyApp({ Component, pageProps }) {
     <BookMarkProvider>
       {/* top bar shown on all sites */}
       <div
-        className={`${inter.className} flex justify-between p-3 bg-[#eeeff2ed] dark:bg-[#1A1C21] border-b-1 border-t-0 border-r-0 border-l-0 border-solid border-zinc-300 dark:border-zinc-600`}
+        className={`${inter.className} flex justify-between p-3 bg-[#eeeff2ed] dark:bg-[#1A1C21] custom-thin-border-bottom `}
       >
-        <div className="flex">
+        <div className="flex ">
           <ScrollToTop />
           {/* <div>
               logga?
@@ -51,19 +51,19 @@ function MyApp({ Component, pageProps }) {
 
           <div className="flex gap-3 items-center mx-20">
             <Link
-              className="text-decoration-line:none no-underline text-black dark:text-white"
+              className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
               href={"news"}
             >
-              News
+              Home
             </Link>{" "}
             <Link
-              className="text-decoration-line:none no-underline text-black dark:text-white"
+              className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
               href={"/politics"}
             >
               Politics
             </Link>{" "}
             <Link
-              className="text-decoration-line:none no-underline text-black dark:text-white"
+              className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
               href={"/technology"}
             >
               Technology
@@ -74,12 +74,14 @@ function MyApp({ Component, pageProps }) {
             >
               Sports
             </Link>
-            <Link
-              className="text-decoration-line:none no-underline text-black dark:text-white"
-              href={"BookMarks"}
-            >
-              Bookmark
-            </Link>
+            <div>
+              <Link
+                className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
+                href={"BookMarks"}
+              >
+                Your saved articles
+              </Link>
+            </div>
             {/* <Link href={"PoliticsTaBort"}>Politics</Link> */}{" "}
           </div>
         </div>
