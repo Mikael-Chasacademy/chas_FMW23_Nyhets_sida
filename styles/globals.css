@@ -27,7 +27,7 @@ h4 {
 }
  */
 
- .topButton {
+.topButton {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,4 +52,18 @@ h4 {
 
 .icon {
   font-size: 20px;
+}
+
+li {
+  list-style: none;
+}
+
+.bookmark-btn {
+border-radius: 10px;
+padding: 10px;
+
+}
+
+.bookmark-btn:hover {
+  background-color: #3d89db;
 }
