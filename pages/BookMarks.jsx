@@ -4,7 +4,7 @@ import Link from "next/link";
 import { fetchDataByCategory } from "./api";
 import Image from "next/image";
 
-const myAPI_KEY = "pub_3826420aa772faa6db69797ad33ddda8dd802";
+const myAPI_KEY = "pub_38716b7bf0044c9fdc848bc0cc7a750ac7c24"; // 200 hämtningar per dag?
 
 /* export async function getStaticPaths() {
   const categories = ["politics", "technology", "pizza"]; // Add more categories as needed
@@ -85,17 +85,28 @@ export default function BookMarks({ news, tech, politics }) {
       <button onClick={() => {
         clearBookmarks()
       }}>Clear All Bookmarks</button>
-      <ul className="grid grid-cols-2 gap-4">
+      <ul className="grid grid-cols-1 gap-2">
         {filteredArticles.map((article) => (
-          <li key={article.article_id}>
-            <button onClick={() => deleteBookmark(article)}>
-              Delete Bookmark
-            </button>
-            <Link href={`/article/${article.article_id}`}>
-              <h2>{article.title}</h2>
-            </Link>
+          // "0.5px solid black"
+          <li style={{borderBottom: "0.5px solid black"}} className="flex flex-col gap-2 p-4" key={article.article_id}>
+            <div>
+              <button className="text-[10px] py-2 px-4 rounded-lg border-none" onClick={() => deleteBookmark(article)}>
+                Delete Bookmark
+              </button>
+            </div>
+
+            <div className="flex gap-4 justify-start">
+              <div className="h-20 w-28 overflow-hidden">
+                <img className="h-full w-auto" src={article.image_url} alt="" />
+              </div>
+                
+              <Link className="text-decoration-line:none no-underline" href={`/article/${article.article_id}`}>
+                <h2 className="text-decoration-line:none no-underline text-black dark:text-white">{article.title}</h2>
+              </Link>
+            </div>
+            
             {console.log(article.image_url)}
-            <img src={article.image_url} alt="" />
+
             {/* <Image 
           loader={myLoader}
           src={article.image_url} 
