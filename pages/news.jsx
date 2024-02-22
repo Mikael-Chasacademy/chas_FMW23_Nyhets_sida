@@ -40,7 +40,7 @@ export default function News({
     <div className="grid mt-10 grid-cols-4 gap-8 mx-20">
       <div className="flex col-span-3 flex-col w-full px-0 ">
         <ul className="list-none p-0">
-          <div className="block mb-4" style={{ borderTop: "3px solid black" }}>
+          <div className="block mb-4 border-t-1 border-b-0 border-l-0 border-r-0 border-solid border-black dark:border-[#EEEFF2]">
             <div className="flex">
               <h3 className="bg-black dark:bg-white text-white dark:text-black p-1 m-0">
                 Our top pick
@@ -82,7 +82,7 @@ export default function News({
       {/* Right Side */}
       <div className="col-span-1 flex  w-full ">
         <ul className="list-none p-0">
-        {/* <div className="block mb-4" style={{ borderTop: "3px solid black" }}> */}
+          {/* <div className="block mb-4" style={{ borderTop: "3px solid black" }}> */}
           <div className="block mb-4 border-t-1 border-b-0 border-l-0 border-r-0 border-solid border-black dark:border-[#EEEFF2]">
             <div className="flex">
               <h3 className="bg-black dark:bg-white text-white dark:text-black p-1 m-0">
@@ -116,7 +116,14 @@ export default function News({
       </div>
       {/* Business */}
       <div className="col-span-4 px-0">
-        {" "}
+        <div className="block mb-4 border-t-1 border-b-0 border-l-0 border-r-0 border-solid border-black dark:border-[#EEEFF2]">
+          <div className="flex">
+            <h3 className="bg-black dark:bg-white text-white dark:text-black p-1 m-0">
+              Business
+            </h3>
+          </div>
+        </div>
+
         {/* Removed px-20 */}
         <ul className="flex flex-row justify-center w-full p-0">
           {businessNews &&
@@ -154,7 +161,15 @@ export default function News({
         </ul>
       </div>
       {/* Lifestyle */}
-      <div className="col-span-4 px-0 bg-amber-500">
+
+      <div className="col-span-4 px-0 ">
+        <div className="block mb-4 border-t-1 border-b-0 border-l-0 border-r-0 border-solid border-black dark:border-[#EEEFF2]">
+          <div className="flex">
+            <h3 className="bg-black dark:bg-white text-white dark:text-black p-1 m-0">
+              Politics
+            </h3>
+          </div>
+        </div>
         {/* Removed px-20 */}
         <ul className="flex justify-center w-full p-0">
           {politicsNews &&
