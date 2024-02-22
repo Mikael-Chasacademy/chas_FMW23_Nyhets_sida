@@ -1,5 +1,5 @@
-import { useContext } from "react"
-import { useTheme, useThemeDispatch } from "../ThemeContext"
+import { useContext } from "react";
+import { useTheme, useThemeDispatch } from "../ThemeContext";
 
 export default function ThemeButton() {
   const { state } = useTheme();
@@ -7,8 +7,10 @@ export default function ThemeButton() {
 
   return (
     <>
-        {
-          state.userPreferences.theme === 'light' ? (<button className="" onClick={() => {
+      {state.userPreferences.theme === "light" ? (
+        <button
+          className=""
+          onClick={() => {
             dispatch({
               type: 'changed_theme',
               theme: 'dark'
@@ -33,7 +35,6 @@ export default function ThemeButton() {
             </div>
         </button>
       )}
-
     </>
-  )
+  );
 }

@@ -4,7 +4,7 @@ const ThemeContext = createContext(null);
 const ThemeDispatchContext = createContext(null);
 
 // > Build optimization failed: found page without a React Component as default export in pages/ThemeContext...
-// I got this error when Vercel tried to deploy the website and do 'npm run build'...? 
+// I got this error when Vercel tried to deploy the website and do 'npm run build'...?
 
 // Create and use your own hook instead of using useContext in the components
 export const useTheme = () => useContext(ThemeContext);
@@ -22,32 +22,35 @@ const initialState = {
 function themeReducer(state, action) {
   // your code here
   switch (action.type) {
-    case 'changed_theme': {
-      return {...state, 
+    case "changed_theme": {
+      return {
+        ...state,
         userPreferences: {
-        ...state.userPreferences,
-        theme: action.theme,
-        }
-      }
-    };
-    case 'changed_fontSize': {
-      return {...state, 
-        userPreferences: {
-        ...state.userPreferences,
-        fontSize: action.fontSize,
-        } 
-      }
+          ...state.userPreferences,
+          theme: action.theme,
+        },
+      };
     }
-    case 'changed_reduceAnimations': {
-      return {...state, 
+    case "changed_fontSize": {
+      return {
+        ...state,
         userPreferences: {
-        ...state.userPreferences,
-        reduceAnimations: action.reduceAnimations
-        } 
-      } 
+          ...state.userPreferences,
+          fontSize: action.fontSize,
+        },
+      };
+    }
+    case "changed_reduceAnimations": {
+      return {
+        ...state,
+        userPreferences: {
+          ...state.userPreferences,
+          reduceAnimations: action.reduceAnimations,
+        },
+      };
     }
     default: {
-      throw Error('Unknown action: ' + action.type);
+      throw Error("Unknown action: " + action.type);
     }
   }
 }
@@ -57,11 +60,10 @@ export const ThemeProvider = ({ children }) => {
   const [state, dispatch] = useReducer(themeReducer, initialState);
 
   return (
-    <ThemeContext.Provider value={{state}}>
+    <ThemeContext.Provider value={{ state }}>
       <ThemeDispatchContext.Provider value={dispatch}>
         {children}
       </ThemeDispatchContext.Provider>
     </ThemeContext.Provider>
-  )
+  );
 };
-

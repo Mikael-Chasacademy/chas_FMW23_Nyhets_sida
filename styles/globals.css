@@ -1,9 +1,8 @@
-/* @import "tailwindcss/base"; */
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
 
-:root {
+root {
   min-width: 459px; /* check _app.js for light/dark-mode colors on the root-element */
  /*  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
   font-family: system-ui;
@@ -22,19 +21,12 @@ h1 {
 }
 
 h2 {
-  font-size: 2.5rem;
+  font-family: "Bebas Neue", sans-serif;
+  //font-weight: 400;
+  font-style: normal;
 }
 
-h3 {
-  font-size: 2rem;
-}
-
-h4 {
-  font-size: 1.5rem;
-}
- */
-
- .topButton {
+.topButton {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,4 +51,17 @@ h4 {
 
 .icon {
   font-size: 20px;
+}
+
+li {
+  list-style: none;
+}
+
+.bookmark-btn {
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.bookmark-btn:hover {
+  background-color: #3d89db;
 }
