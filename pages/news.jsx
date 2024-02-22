@@ -1,11 +1,12 @@
 import Link from "next/link";
 
-const myAPI_KEY = "pub_387164ed0851b0cd6e7167139708c0617711e";
+const myAPI_KEY = "pub_3826420aa772faa6db69797ad33ddda8dd802";
+const myAPI_KEY2 = "pub_38735da2aedac9ef5783c66faf622ffdeaa00";
 
 export async function getStaticProps() {
   const fetchNews = async (category) => {
     const res = await fetch(
-      `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=se&language=sv&category=${category}`
+      `https://newsdata.io/api/1/news?apikey=${myAPI_KEY2}&country=se&language=sv&category=${category}`
     );
     const data = await res.json();
     return data.results;
@@ -38,49 +39,44 @@ export default function News({
   return (
     <div className="grid mt-10 grid-cols-4 gap-8 mx-20">
       <div className="flex col-span-3 flex-col w-full px-0 ">
-        <div>
-          <ul className="list-none p-0">
-            <div
-              className="block mb-4"
-              style={{ borderTop: "3px solid black" }}
-            >
-              <div className="flex">
-                <h3 className="bg-black dark:bg-white text-white dark:text-black p-1 m-0">
-                  Our top pick
-                </h3>
-              </div>
+        <ul className="list-none p-0">
+          <div className="block mb-4" style={{ borderTop: "3px solid black" }}>
+            <div className="flex">
+              <h3 className="bg-black dark:bg-white text-white dark:text-black p-1 m-0">
+                Our top pick
+              </h3>
             </div>
+          </div>
 
-            {techNews &&
-              techNews
-                .filter((article, index) => article.image_url && index < 1)
-                .map((article, index) => (
-                  <li key={article.article_id} className="flex mb-4 col-span-2">
-                    <div>
-                      <p>{capitalizeFirstLetter(article.category)}</p>
+          {techNews &&
+            techNews
+              .filter((article, index) => article.image_url && index < 1)
+              .map((article, index) => (
+                <li key={article.article_id} className="flex mb-4 col-span-2">
+                  <div>
+                    <p>{capitalizeFirstLetter(article.category)}</p>
 
-                      {index === 0 || index === 1 ? (
-                        <img
-                          className="h-200 w-full"
-                          src={article.image_url}
-                          alt=""
-                        />
-                      ) : null}
-                      <Link
-                        className="no-underline"
-                        href={`/article/${article.article_id}`}
-                        passHref
-                      >
-                        <h2 className="text-black dark:text-white text-2xl no-underline hover:underline">
-                          {article.title}
-                        </h2>
-                      </Link>
-                      <p>{article.creator}</p>
-                    </div>
-                  </li>
-                ))}
-          </ul>
-        </div>
+                    {index === 0 || index === 1 ? (
+                      <img
+                        className="h-96 w-full object-cover"
+                        src={article.image_url}
+                        alt=""
+                      />
+                    ) : null}
+                    <Link
+                      className="no-underline"
+                      href={`/article/${article.article_id}`}
+                      passHref
+                    >
+                      <h2 className="text-black dark:text-white text-2xl no-underline hover:underline font-anta">
+                        {article.title}
+                      </h2>
+                    </Link>
+                    <p>{article.creator}</p>
+                  </div>
+                </li>
+              ))}
+        </ul>
       </div>
       {/* Main News (Center) - Commented out for now */}
       {/* Right Side */}
@@ -157,18 +153,17 @@ export default function News({
         </ul>
       </div>
       {/* Lifestyle */}
-      <div className="col-span-4 px-0">
-        {" "}
+      <div className="col-span-4 px-0 bg-amber-500">
         {/* Removed px-20 */}
         <ul className="flex justify-center w-full p-0">
-          {techNews &&
-            techNews
+          {politicsNews &&
+            politicsNews
               .filter((article, index) => article.image_url && index === 0)
               .map((article, index) => (
-                <li key={article.article_id} className="flex">
+                <li key={article.article_id} className="flex w-full">
                   {article.image_url && (
                     <img
-                      className="w-3/4 object-cover"
+                      className="w-full object-cover h-96"
                       src={article.image_url}
                       alt=""
                     />
@@ -181,8 +176,8 @@ export default function News({
                       <h2 className="text-black dark:text-white hover:underline no-underline text-4xl">
                         {article.title}
                       </h2>
+                      <p>{article.category}</p>
                     </Link>
-                    <p>{article.creator}</p>
                   </div>
                 </li>
               ))}
