@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const myAPI_KEY = "pub_387164ed0851b0cd6e7167139708c0617711e";
+const myAPI_KEY = "pub_382120086c1799d089c0da41a4c9ee4d8a9ec";
 
 export async function getStaticProps() {
   try {
@@ -61,8 +61,7 @@ export default function News({
         <div>
           <ul className="list-none p-0">
             <div
-              className="block mb-4"
-              style={{ borderTop: "3px solid black" }}
+              className="block mb-4 border-t-1 border-b-0 border-l-0 border-r-0 border-solid border-black dark:border-[#EEEFF2]"
             >
               <div className="flex">
                 <h3 className="bg-black dark:bg-white text-white dark:text-black p-1 m-0">
@@ -99,7 +98,8 @@ export default function News({
       {/* Right Side */}
       <div className="col-span-1 flex  w-full ">
         <ul className="list-none p-0">
-          <div className="block mb-4" style={{ borderTop: "3px solid black" }}>
+        {/* <div className="block mb-4" style={{ borderTop: "3px solid black" }}> */}
+          <div className="block mb-4 border-t-1 border-b-0 border-l-0 border-r-0 border-solid border-black dark:border-[#EEEFF2]">
             <div className="flex">
               <h3 className="bg-black dark:bg-white text-white dark:text-black p-1 m-0">
                 Latest

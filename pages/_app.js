@@ -19,16 +19,17 @@ function MyApp({ Component, pageProps }) {
   console.log(state.userPreferences.theme);
 
   useEffect(() => {
+    //bg-[#eeeff2ed] dark:bg-[#1A1C21]
     
     const rootEl = document.documentElement;
     if (state.userPreferences.theme === "light") {
       rootEl.classList.add('dark');
-      rootEl.style.backgroundColor = "black"  // ROOT BACKGROUND COLOR
-      rootEl.style.color = "white"  // ROOT TEXT COLOR
+      rootEl.style.backgroundColor = "#1A1C21"  // ROOT BACKGROUND COLOR
+      rootEl.style.color = "#eeeff2ed"  // ROOT TEXT COLOR
     } else if (state.userPreferences.theme === "dark") {
       rootEl.classList.remove('dark');
-      rootEl.style.backgroundColor = "white" // ROOT BACKGROUND COLOR
-      rootEl.style.color = "black"  // ROOT TEXT COLOR
+      rootEl.style.backgroundColor = "#eeeff2ed" // ROOT BACKGROUND COLOR
+      rootEl.style.color = "#1A1C21"  // ROOT TEXT COLOR
     } else {
       console.log("Unknown Theme for Dark/Light mode");
     }
@@ -40,30 +41,32 @@ function MyApp({ Component, pageProps }) {
 
   return (
      <BookMarkProvider>
-      <div  className={`${inter.className} flex justify-between px-3`}>
-        <div className="flex">
-          <ScrollToTop/>
-          {/* <div>
-            logga?
-          </div> */}
-          
-          <div className="flex gap-3 items-center">
-            <Link className="text-decoration-line:none no-underline" href={"news"}>News</Link>
-            {" "}
-              <Link className="text-decoration-line:none no-underline" href={"/politics"}>Politics</Link>
-            {" "}
-            <Link className="text-decoration-line:none no-underline" href={"/technology"}>Technology</Link>
-            {" "}
-            <Link className="text-decoration-line:none no-underline" href={"/sports"}>Sports</Link>
+       {/* top bar shown on all sites */}
+        <div className={`${inter.className} flex justify-between p-3 bg-[#eeeff2ed] dark:bg-[#23272F] `}>
+          <div className="flex">
+            <ScrollToTop/>
+            {/* <div>
+              logga?
+            </div> */}
             
-            <Link className="text-decoration-line:none no-underline" href={"BookMarks"}>Bookmark</Link>
-            {/* <Link href={"PoliticsTaBort"}>Politics</Link> */}
-            {" "}
+            <div className="flex gap-3 items-center">
+              <Link className="text-decoration-line:none no-underline text-black dark:text-white" href={"news"}>News</Link>
+              {" "}
+                <Link className="text-decoration-line:none no-underline text-black dark:text-white" href={"/politics"}>Politics</Link>
+              {" "}
+              <Link className="text-decoration-line:none no-underline text-black dark:text-white" href={"/technology"}>Technology</Link>
+              {" "}
+              <Link className="text-decoration-line:none no-underline text-black dark:text-white" href={"/sports"}>Sports</Link>
+              
+              <Link className="text-decoration-line:none no-underline text-black dark:text-white" href={"BookMarks"}>Bookmark</Link>
+              {/* <Link href={"PoliticsTaBort"}>Politics</Link> */}
+              {" "}
+            </div>
+            
           </div>
-          
+          <ThemeButton></ThemeButton>
         </div>
-        <ThemeButton></ThemeButton>
-      </div>
+
         <Component {...pageProps} />
 
       </BookMarkProvider>   
