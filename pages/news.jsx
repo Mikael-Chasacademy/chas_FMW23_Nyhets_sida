@@ -1,6 +1,7 @@
 import Link from "next/link";
 
-const myAPI_KEY = "pub_38716b7bf0044c9fdc848bc0cc7a750ac7c24";
+const myAPI_KEY = "pub_3826420aa772faa6db69797ad33ddda8dd802";
+const myAPI_KEY2 = "pub_38735da2aedac9ef5783c66faf622ffdeaa00";
 
 export async function getStaticProps() {
   try {
@@ -69,7 +70,7 @@ export default function News({
       {/* Left Side */}
       <div className="col-span-1 flex flex-col w-full px-20 ">
         <ul className="list-none p-0">
-          <h2 className="px-20">Todays picks</h2>
+          <h2 className="px-20 ">Todays picks</h2>
           {techNews &&
             techNews
               .filter((article, index) => article.image_url && index < 2)
@@ -91,7 +92,7 @@ export default function News({
                       href={`/article/${article.article_id}`}
                       passHref
                     >
-                      <h2 className="text-black dark:text-white text-base no-underline">
+                      <h2 className="text-black dark:text-white text-lg no-underline">
                         {article.title}
                       </h2>
                     </Link>
@@ -118,8 +119,12 @@ export default function News({
                         alt=""
                       />
                     )}
-                    <Link href={`/article/${article.article_id}`} passHref>
-                      <h2 className="text-black dark:text-white text-base no-underline">
+                    <Link
+                      className="no-underline"
+                      href={`/article/${article.article_id}`}
+                      passHref
+                    >
+                      <h2 className="text-black dark:text-white text-4xl">
                         {article.title}
                       </h2>
                     </Link>
@@ -132,14 +137,14 @@ export default function News({
       {/* Right Side */}
       <div className="col-span-1 flex justify-center w-full">
         <ul className="list-none p-0">
-          <h2 className="px-20">Latest</h2>
+          <h2 className="px-20 text-xl">Latest</h2>
           {politicsNews &&
             politicsNews
               .filter((article, index) => article.image_url && index < 7)
               .map((article, index) => (
                 <li
                   key={article.article_id}
-                  className="flex flex-col w-3/5  mb-4 px-20"
+                  className="flex flex-col w-3/5  mb-2 px-20"
                 >
                   {/* <div>
                     {index === 0 || index === 1 ? (
@@ -150,8 +155,12 @@ export default function News({
                       />
                     ) : null}
                   </div> */}
-                  <Link href={`/article/${article.article_id}`} passHref>
-                    <h2 className="text-black dark:text-white text-base no-underline">
+                  <Link
+                    className="no-underline"
+                    href={`/article/${article.article_id}`}
+                    passHref
+                  >
+                    <h2 className="text-black dark:text-white text-lg no-underline">
                       {article.title}
                     </h2>
                   </Link>
@@ -185,8 +194,11 @@ export default function News({
                           alt=""
                         />
                       )}
-                      <Link href={`/article/${article.article_id}`}>
-                        <h2 className="text-black dark:text-white text-base no-underline">
+                      <Link
+                        className="no-underline"
+                        href={`/article/${article.article_id}`}
+                      >
+                        <h2 className="text-black dark:text-white text-xl no-underline">
                           {article.title}
                         </h2>
                       </Link>
@@ -197,32 +209,33 @@ export default function News({
         </div>
       </div>
       {/* Lifestyle */}
-      <div className="col-span-4">
-        <div className="px-20">
-          <ul id="MAIN3" className="flex flex-row justify-center w-full p-0">
-            {techNews &&
-              techNews
-                .filter((article, index) => article.image_url && index === 0)
-                .map((article, index) => (
-                  <li key={article.article_id} className="flex flex-row mb-4">
-                    <div>
-                      {article.image_url && (
-                        <img
-                          className="h-200 w-3/4 object-cover"
-                          src={article.image_url}
-                          alt=""
-                        />
-                      )}
-                    </div>
-                    <Link href={`/article/${article.article_id}`}>
-                      <h2 className="text-black dark:text-white text-base no-underline">
+      <div className="col-span-4  px-20">
+        <ul id="MAIN3" className="flex justify-center w-full p-0">
+          {techNews &&
+            techNews
+              .filter((article, index) => article.image_url && index === 0)
+              .map((article, index) => (
+                <li key={article.article_id} className="flex">
+                  {article.image_url && (
+                    <img
+                      className="w-3/4 object-cover"
+                      src={article.image_url}
+                      alt=""
+                    />
+                  )}
+                  <div className="flex flex-col justify-start ml-4">
+                    <Link
+                      className="no-underline"
+                      href={`/article/${article.article_id}`}
+                    >
+                      <h2 className="text-black dark:text-white  hover:underline no-underline text-4xl">
                         {article.title}
                       </h2>
                     </Link>
-                  </li>
-                ))}
-          </ul>
-        </div>
+                  </div>
+                </li>
+              ))}
+        </ul>
       </div>
     </div>
   );
