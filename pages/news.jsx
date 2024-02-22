@@ -3,50 +3,30 @@ import Link from "next/link";
 const myAPI_KEY = "pub_382120086c1799d089c0da41a4c9ee4d8a9ec";
 
 export async function getStaticProps() {
-  try {
-    const fetchNews = async (category) => {
-      const res = await fetch(
-        `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=se&language=sv&category=${category}`
-      );
-      const data = await res.json();
-      return data.results;
-    };
+  const fetchNews = async (category) => {
+    const res = await fetch(
+      `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=se&language=sv&category=${category}`
+    );
+    const data = await res.json();
+    return data.results;
+  };
 
-    const [topNews, politicsNews, techNews, businessNews] = await Promise.all([
-      fetchNews("top"),
-      fetchNews("politics"),
-      fetchNews("technology"),
-      fetchNews("business"),
-    ]);
+  const [topNews, politicsNews, techNews, businessNews] = await Promise.all([
+    fetchNews("top"),
+    fetchNews("politics"),
+    fetchNews("technology"),
+    fetchNews("business"),
+  ]);
 
-    return {
-      props: {
-        topNews,
-        politicsNews,
-        techNews,
-        businessNews,
-      },
-      revalidate: 10,
-    };
-  } catch (error) {
-    console.error("Error fetching news data:", error);
-
-    const placeholderArticle = {
-      article_id: -1,
-      title: "Placeholder Article",
-      image_url: "/placeholder-image.jpg",
-    };
-
-    return {
-      props: {
-        topNews: [placeholderArticle],
-        politicsNews: [placeholderArticle],
-        techNews: [placeholderArticle],
-        businessNews: [placeholderArticle],
-      },
-      revalidate: 10,
-    };
-  }
+  return {
+    props: {
+      topNews,
+      politicsNews,
+      techNews,
+      businessNews,
+    },
+    revalidate: 10,
+  };
 }
 
 export default function News({
@@ -56,7 +36,7 @@ export default function News({
   businessNews,
 }) {
   return (
-    <div className="grid mt-20 grid-cols-4 gap-8 mx-20">
+    <div className="grid mt-10 grid-cols-4 gap-8 mx-20">
       <div className="flex col-span-3 flex-col w-full px-0 ">
         <div>
           <ul className="list-none p-0">
@@ -76,6 +56,8 @@ export default function News({
                 .map((article, index) => (
                   <li key={article.article_id} className="flex mb-4 col-span-2">
                     <div>
+                      <p>{capitalizeFirstLetter(article.category)}</p>
+
                       {index === 0 || index === 1 ? (
                         <img
                           className="h-200 w-full"
@@ -83,11 +65,16 @@ export default function News({
                           alt=""
                         />
                       ) : null}
-                      <Link href={`/article/${article.article_id}`} passHref>
-                        <h2 className="text-black dark:text-white text-2xl no-underline">
+                      <Link
+                        className="no-underline"
+                        href={`/article/${article.article_id}`}
+                        passHref
+                      >
+                        <h2 className="text-black dark:text-white text-2xl no-underline hover:underline">
                           {article.title}
                         </h2>
                       </Link>
+                      <p>{article.creator}</p>
                     </div>
                   </li>
                 ))}
@@ -116,11 +103,16 @@ export default function News({
                 >
                   {" "}
                   {/* Removed px-20 */}
-                  <Link href={`/article/${article.article_id}`} passHref>
-                    <h2 className="text-black dark:text-white text-lg no-underline">
+                  <Link
+                    className="no-underline"
+                    href={`/article/${article.article_id}`}
+                    passHref
+                  >
+                    <h2 className="text-black dark:text-white text-lg no-underline hover:underline">
                       {article.title}
                     </h2>
                   </Link>
+                  <p>{article.creator}</p>
                 </li>
               ))}
         </ul>
@@ -150,11 +142,15 @@ export default function News({
                         alt=""
                       />
                     )}
-                    <Link href={`/article/${article.article_id}`}>
-                      <h2 className="text-black dark:text-white text-xl no-underline">
+                    <Link
+                      className="no-underline"
+                      href={`/article/${article.article_id}`}
+                    >
+                      <h2 className="text-black dark:text-white text-xl no-underline hover:underline">
                         {article.title}
                       </h2>
                     </Link>
+                    <p>{article.creator}</p>
                   </div>
                 </li>
               ))}
@@ -178,11 +174,15 @@ export default function News({
                     />
                   )}
                   <div className="flex flex-col justify-start ml-4">
-                    <Link href={`/article/${article.article_id}`}>
+                    <Link
+                      className="no-underline"
+                      href={`/article/${article.article_id}`}
+                    >
                       <h2 className="text-black dark:text-white hover:underline no-underline text-4xl">
                         {article.title}
                       </h2>
                     </Link>
+                    <p>{article.creator}</p>
                   </div>
                 </li>
               ))}
@@ -190,4 +190,11 @@ export default function News({
       </div>
     </div>
   );
+
+  function capitalizeFirstLetter(string) {
+    if (typeof string !== "string" || string.length === 0) {
+      return ""; // Return an empty string if the input is not a string or is empty
+    }
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 }
