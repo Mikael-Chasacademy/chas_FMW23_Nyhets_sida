@@ -1,18 +1,15 @@
 import { BookMarkContext } from "@/BookMarkContext";
 import { useContext } from "react";
 import Link from "next/link";
-import { fetchDataByCategory } from "./api";
-import Image from "next/image";
+import { Inter } from "next/font/google";
 
-const myAPI_KEY = "pub_38716b7bf0044c9fdc848bc0cc7a750ac7c24"; // 200 hämtningar per dag?
 
-/* export async function getStaticPaths() {
-  const categories = ["politics", "technology", "pizza"]; // Add more categories as needed
-  const paths = categories.map(category => ({ params: { category: category } }));
-  return { paths, fallback: false };
-} */
+const inter = Inter({ subsets: ["latin"] });
+
+const myAPI_KEY = "pub_387164ed0851b0cd6e7167139708c0617711e"; // 200 hämtningar per dag?
 
 export async function getStaticProps() {
+  // api.jsx funkar bara med staticPaths, dvs att filnamnet är en variabel (som t.ex. [category].jsx och [id].jsx)
   const pizzaRes = await fetch(
     `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=pizza`
   );
@@ -28,27 +25,27 @@ export async function getStaticProps() {
   );
   const politicsData = await politicsRes.json();
 
-  /* const { category } = params;
-  const news = await fetchDataByCategory(category);
-  return {
-    props: { news },
-    revalidate: 10,
-  };
-   */
+  const businessRes = await fetch(
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=business`
+  );
+  const businessData = await businessRes.json();
+
+
   return {
     props: {
       news: pizzaData.results,
       tech: techData.results,
       politics: politicsData.results,
+      business: businessData.results,
     },
   };
 }
 
-export default function BookMarks({ news, tech, politics }) {
+export default function BookMarks({ news, tech, politics, business }) {
   //export default function BookMarks({ news }) {
   const { state, dispatch } = useContext(BookMarkContext);
 
-  const combinedData = [...news, ...tech, ...politics];
+  const combinedData = [...news, ...tech, ...politics, ...business];
 
   const filteredArticles = combinedData.filter(
     (article) =>
@@ -77,18 +74,31 @@ export default function BookMarks({ news, tech, politics }) {
   }; */
 
   return (
-    <div className="">
-      <p>Saved articles:</p>
+    <div>
+   {/*  <div className={`${inter.className}`}> */}
+      {/* <p>Saved articles:</p>
       {state.bookmarks.map((bookmark) => (
         <span key={bookmark.id}> {bookmark.id}</span>
-      ))}
-      <button onClick={() => {
+      ))} */}
+      <div className="flex justify-center">
+        <h1>Saved Articles</h1>
+      </div>
+      <button className="py-2 px-4 rounded-lg border-none" onClick={() => {
         clearBookmarks()
       }}>Clear All Bookmarks</button>
+      <div className="block mt-4" style={{borderTop: "1px solid black"}}>
+        <div className="flex">
+          <h3 className="bg-black dark:bg-white text-white dark:text-black p-1 m-0">Latest</h3>
+        </div>
+      </div>
+      
       <ul className="grid grid-cols-1 gap-2">
-        {filteredArticles.map((article) => (
+        {/* {filteredArticles.map((article) => (
           // "0.5px solid black"
-          <li style={{borderBottom: "0.5px solid black"}} className="flex flex-col gap-2 p-4" key={article.article_id}>
+          <li style={{borderBottom: "0.5px solid black"}} className="flex flex-col gap-2 p-4  " key={article.article_id}> */}
+        {filteredArticles.map((article, index) => ( // using index to remove padding at the top
+          // "0.5px solid black"
+          <li style={{ borderBottom: "0.5px solid black", paddingTop: index === 0 ? 0 : "inherit" }} className="flex flex-col gap-2 p-4" key={article.article_id}>
             <div>
               <button className="text-[10px] py-2 px-4 rounded-lg border-none" onClick={() => deleteBookmark(article)}>
                 Delete Bookmark
@@ -118,9 +128,6 @@ export default function BookMarks({ news, tech, politics }) {
         ))}
       </ul>
 
-      {/* {"hallå"} */}
     </div>
   );
 }
-
-// hej

@@ -2,12 +2,19 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+
 :root {
   min-width: 459px; /* check _app.js for light/dark-mode colors on the root-element */
+ /*  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
+  font-family: system-ui;
 }
 
 body {
   font-size: 1rem;
+}
+
+h1 {
+  
 }
 /* 
 h1 {
