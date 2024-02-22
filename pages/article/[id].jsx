@@ -46,7 +46,7 @@ import { useEffect } from "react";
 
 export async function getStaticPaths() {
   const res = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${DIN_API_NYCKEL}&q=pizza`
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=pizza`
   );
   const data = await res.json();
 
@@ -61,7 +61,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const res = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${DIN_API_NYCKEL}&q=pizza`
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=pizza`
   );
   const data = await res.json();
 
