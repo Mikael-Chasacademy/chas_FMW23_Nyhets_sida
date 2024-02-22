@@ -1,7 +1,6 @@
 import Link from "next/link";
 
-const myAPI_KEY = "pub_3826420aa772faa6db69797ad33ddda8dd802";
-const myAPI_KEY2 = "pub_38735da2aedac9ef5783c66faf622ffdeaa00";
+const myAPI_KEY = "pub_387164ed0851b0cd6e7167139708c0617711e";
 
 export async function getStaticProps() {
   const fetchNews = async (category) => {

@@ -6,6 +6,10 @@ import { useEffect } from "react";
 import { ThemeProvider, useTheme, useThemeDispatch } from "../ThemeContext";
 import ThemeButton from "@/components/ThemeButton";
 import ScrollToTop from "@/ScrollToTopButton";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
+
 
 function MyApp({ Component, pageProps }) {
   const { state } = useTheme();
@@ -36,21 +40,26 @@ function MyApp({ Component, pageProps }) {
 
   return (
      <BookMarkProvider>
-      <div className="flex justify-between px-3">
-        <div className="flex gap-3">
+      <div  className={`${inter.className} flex justify-between px-3`}>
+        <div className="flex">
           <ScrollToTop/>
-          <Link href={"news"}>News</Link>
-          {" "}
-            <Link href={"/politics"}>Politics</Link>
-          {" "}
-          <Link href={"/technology"}>Technology</Link>
-          {" "}
-          <Link href={"/sports"}>Sports</Link>
+          {/* <div>
+            logga?
+          </div> */}
           
-          <Link href={"BookMarks"}>Bookmark</Link>
-          {/* <Link href={"PoliticsTaBort"}>Politics</Link> */}
-          {" "}
-        
+          <div className="flex gap-3 items-center">
+            <Link className="text-decoration-line:none no-underline" href={"news"}>News</Link>
+            {" "}
+              <Link className="text-decoration-line:none no-underline" href={"/politics"}>Politics</Link>
+            {" "}
+            <Link className="text-decoration-line:none no-underline" href={"/technology"}>Technology</Link>
+            {" "}
+            <Link className="text-decoration-line:none no-underline" href={"/sports"}>Sports</Link>
+            
+            <Link className="text-decoration-line:none no-underline" href={"BookMarks"}>Bookmark</Link>
+            {/* <Link href={"PoliticsTaBort"}>Politics</Link> */}
+            {" "}
+          </div>
           
         </div>
         <ThemeButton></ThemeButton>

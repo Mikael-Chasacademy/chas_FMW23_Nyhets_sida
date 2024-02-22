@@ -13,7 +13,7 @@ export const useThemeDispatch = () => useContext(ThemeDispatchContext);
 const initialState = {
   //theme: "light",
   userPreferences: {
-    theme: "dark",
+    theme: "dark", // will run once and change it to light at start
     fontSize: "medium",
     reduceAnimations: false,
   },

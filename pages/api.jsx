@@ -1,5 +1,5 @@
 export async function fetchDataByCategory(category) {
-  const myAPI_KEY = "pub_38305e955fd48635fc6aea34d9011d6189f5a";
+  const myAPI_KEY = "pub_387164ed0851b0cd6e7167139708c0617711e";
   const res = await fetch(
     `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=${category}`
   );
