@@ -6,7 +6,7 @@ import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const myAPI_KEY = "pub_387164ed0851b0cd6e7167139708c0617711e"; // 200 hämtningar per dag?
+const myAPI_KEY = "pub_382120086c1799d089c0da41a4c9ee4d8a9ec"; // 200 hämtningar per dag?
 
 export async function getStaticProps() {
   // api.jsx funkar bara med staticPaths, dvs att filnamnet är en variabel (som t.ex. [category].jsx och [id].jsx)
@@ -74,21 +74,21 @@ export default function BookMarks({ news, tech, politics, business }) {
   }; */
 
   return (
-    <div>
+    <div >
    {/*  <div className={`${inter.className}`}> */}
       {/* <p>Saved articles:</p>
       {state.bookmarks.map((bookmark) => (
         <span key={bookmark.id}> {bookmark.id}</span>
       ))} */}
       <div className="flex justify-center">
-        <h1>Saved Articles</h1>
+      <h1>Saved Articles</h1>
       </div>
       <button className="py-2 px-4 rounded-lg border-none" onClick={() => {
         clearBookmarks()
       }}>Clear All Bookmarks</button>
-      <div className="block mt-4" style={{borderTop: "1px solid black"}}>
+      <div className="block mt-4 border-t-1 border-b-0 border-l-0 border-r-0 border-solid border-black dark:border-[#EEEFF2]">
         <div className="flex">
-          <h3 className="bg-black dark:bg-white text-white dark:text-black p-1 m-0">Latest</h3>
+          <h3 className="bg-black dark:bg-[#EEEFF2] text-[#EEEFF2] dark:text-black p-1 m-0">Latest</h3>
         </div>
       </div>
       

@@ -1,12 +1,14 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@200..700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Anta&family=Bebas+Neue&family=Oswald:wght@200..700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@400..700&family=Sixtyfour&display=swap'); */
 
-/*
+
 :root {
-  min-width: 459px; /* check _app.js for light/dark-mode colors on the root-element 
-  font-family: system-ui;
+  min-width: 459px; /* check _app.js for light/dark-mode colors on the root-element */
+  /* font-family: Helvetica, Arial, sans-serif;  */
+ /*  font-family: system-ui;   */
+ font-family: 'Inter', sans-serif;
 }
 */
 
@@ -14,9 +16,20 @@ body {
   font-size: 1rem;
 }
 
-h2 {
-  font-family: "Anta", sans-serif;
-}
+
+/* h1 {
+  font-family: "Sixtyfour", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "BLED" 0,
+    "SCAN" 0;
+} */
+/* 
+h1 {
+  
+} */
 /* 
 h1 {
   font-size: 3.75rem;
@@ -67,5 +80,4 @@ li {
 .bookmark-btn:hover {
   background-color: #3d89db;
 }
-
-*/
+ */

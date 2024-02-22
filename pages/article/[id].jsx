@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
- const myAPI_KEY = "pub_387164ed0851b0cd6e7167139708c0617711e";
+ const myAPI_KEY = "pub_382120086c1799d089c0da41a4c9ee4d8a9ec";
 
  export default function Article(props) {
   console.log("Article props", props);
@@ -42,11 +42,12 @@ import { useEffect } from "react";
   )
  } */
 
- const myAPI_KEY = "pub_387164ed0851b0cd6e7167139708c0617711e";
-
+//##################################################################
+/* const myAPI_KEY = "pub_38715d0b453471050f31a7ef0c5d7a37e385e";
+//Hämtar data
 export async function getStaticPaths() {
   const res = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=pizza`
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=politics`
   );
   const data = await res.json();
 
@@ -58,10 +59,12 @@ export async function getStaticPaths() {
 
   return { paths, fallback: false };
 }
+//Hämtar data
 
+//Använder Data
 export async function getStaticProps({ params }) {
   const res = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=pizza`
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=politics`
   );
   const data = await res.json();
 
@@ -75,6 +78,7 @@ export async function getStaticProps({ params }) {
     },
   };
 }
+//Använder Data
 
 export default function Article({ article }) {
   return (
@@ -83,6 +87,141 @@ export default function Article({ article }) {
         <>
           <h2>{article.title}</h2>
           <img src={article.image_url} />
+        </>
+      )}
+    </div>
+  );
+} */
+//##################################################################
+
+const myAPI_KEY = "pub_38715851a375bfab2b1c010cd896252eb7e5b";
+//Hämtar data
+export async function getStaticPaths() {
+  const topRes = await fetch(
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=top`
+  );
+
+  const topData = await topRes.json();
+
+  const topArticles = topData.results;
+
+  const topPaths = topArticles.map((article) => ({
+    params: { id: article.article_id.toString() },
+  }));
+
+  const politicsRes = await fetch(
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=politics`
+  );
+
+  const politicsData = await politicsRes.json();
+
+  const politicsArticles = politicsData.results;
+
+  const politicsPaths = politicsArticles.map((article) => ({
+    params: { id: article.article_id.toString() },
+  }));
+
+  const technologyRes = await fetch(
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=technology`
+  );
+
+  const technologyData = await technologyRes.json();
+
+  const technologyArticles = technologyData.results;
+
+  const technologyPaths = technologyArticles.map((article) => ({
+    params: { id: article.article_id.toString() },
+  }));
+
+  const businessRes = await fetch(
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=business`
+  );
+
+  const businessData = await businessRes.json();
+
+  const businessArticles = businessData.results;
+
+  const businessPaths = businessArticles.map((article) => ({
+    params: { id: article.article_id.toString() },
+  }));
+
+  return {
+    paths: [
+      ...topPaths,
+      ...politicsPaths,
+      ...technologyPaths,
+      ...businessPaths,
+    ],
+    fallback: false,
+  };
+}
+//Hämtar data
+
+//Använder Data
+export async function getStaticProps({ params }) {
+  const topRes = await fetch(
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=top`
+  );
+  const topData = await topRes.json();
+
+  const topArticles = topData.results;
+
+  const topArticle = topArticles.find(
+    (article) => article.article_id == params.id
+  );
+
+  const politicsRes = await fetch(
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=politics`
+  );
+  const politicsData = await politicsRes.json();
+
+  const politicsArticles = politicsData.results;
+
+  const politicsArticle = politicsArticles.find(
+    (article) => article.article_id == params.id
+  );
+
+  const technologyRes = await fetch(
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=technology`
+  );
+  const technologyData = await technologyRes.json();
+
+  const technologyArticles = technologyData.results;
+
+  const technologyArticle = technologyArticles.find(
+    (article) => article.article_id == params.id
+  );
+
+  const businessRes = await fetch(
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=business`
+  );
+  const businessData = await businessRes.json();
+
+  const businessArticles = businessData.results;
+
+  const businessArticle = businessArticles.find(
+    (article) => article.article_id == params.id
+  );
+
+  return {
+    props: {
+      article:
+        topArticle || politicsArticle || technologyArticle || businessArticle, // Use whichever article is found first
+    },
+  };
+}
+
+//Använder Data
+
+export default function Article({ article }) {
+  return (
+    <div>
+      {article && (
+        <>
+          <h2>{article.title}</h2>
+          <img src={article.image_url} alt={article.title} />
+          <p>{article.description}</p>
+          <h3>{article.content}</h3>
         </>
       )}
     </div>
