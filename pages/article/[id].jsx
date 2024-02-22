@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
- const myAPI_KEY = "pub_382120086c1799d089c0da41a4c9ee4d8a9ec";
+ const myAPI_KEY = "pub_387164ed0851b0cd6e7167139708c0617711e";
 
  export default function Article(props) {
   console.log("Article props", props);
@@ -42,7 +42,7 @@ import { useEffect } from "react";
   )
  } */
 
- const DIN_API_NYCKEL = "pub_38716b7bf0044c9fdc848bc0cc7a750ac7c24";
+ const myAPI_KEY = "pub_387164ed0851b0cd6e7167139708c0617711e";
 
 export async function getStaticPaths() {
   const res = await fetch(

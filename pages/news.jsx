@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const myAPI_KEY = "pub_38716b7bf0044c9fdc848bc0cc7a750ac7c24";
+const myAPI_KEY = "pub_387164ed0851b0cd6e7167139708c0617711e";
 
 export async function getStaticProps() {
   try {
