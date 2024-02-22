@@ -1,167 +1,192 @@
 import Link from "next/link";
 
-const myAPI_KEY = "pub_38305e955fd48635fc6aea34d9011d6189f5a";
+const myAPI_KEY = "pub_38716b7bf0044c9fdc848bc0cc7a750ac7c24";
 
 export async function getStaticProps() {
-  const mainRes = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=se&language=sv&category=top`
-  );
-  const mainData = await mainRes.json();
+  try {
+    const topRes = await fetch(
+      `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=se&language=sv&category=top`
+    );
+    const topData = await topRes.json();
 
-  const politicsRes = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=se&language=sv&category=politics`
-  );
-  const politicsData = await politicsRes.json();
+    const politicsRes = await fetch(
+      `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=se&language=sv&category=politics`
+    );
+    const politicsData = await politicsRes.json();
 
-  const technologyRes = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=se&language=sv&category=technology`
-  );
-  const technologyData = await technologyRes.json();
+    const technologyRes = await fetch(
+      `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=se&language=sv&category=technology`
+    );
+    const technologyData = await technologyRes.json();
 
-  return {
-    props: {
-      mainNews: mainData.results,
-      rightSideNews: politicsData.results,
-      leftSideNews: technologyData.results,
-    },
+    const businessRes = await fetch(
+      `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=se&language=sv&category=business`
+    );
+    const businessData = await businessRes.json();
 
-    revalidate: 10,
-  };
+    return {
+      props: {
+        topNews: topData.results,
+        politicsNews: politicsData.results,
+        techNews: technologyData.results,
+        businessNews: businessData.results,
+      },
+      revalidate: 10,
+    };
+  } catch (error) {
+    console.error("Error fetching news data:", error);
+
+    const placeholderArticle = {
+      article_id: -1,
+      title: "Placeholder Article",
+      image_url: "/placeholder-image.jpg",
+    };
+
+    return {
+      props: {
+        topNews: [placeholderArticle],
+        politicsNews: [placeholderArticle],
+        techNews: [placeholderArticle],
+      },
+      revalidate: 10,
+    };
+  }
 }
 
-export default function News({ mainNews, rightSideNews, leftSideNews }) {
-  console.log(mainNews);
-  console.log(rightSideNews);
-  console.log(leftSideNews);
+export default function News({
+  topNews,
+  politicsNews,
+  techNews,
+  businessNews,
+}) {
+  console.log(topNews);
+  console.log(politicsNews);
+  console.log(techNews);
+  console.log(businessNews);
 
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(12, 1fr)",
-        // gap: "20px",
-        marginTop: "100px",
-        // color: "black",
-        padding: "20px",
-        // backgroundColor: "red",
-        width: "100%",
-      }}
-    >
-      <div
-        style={{
-          gridColumn: "3 / span 9",
-          gridRow: "1",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          paddingRight: "20px",
-          paddingLeft: "20px",
-          // backgroundColor: "blue",
-          width: "80%",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-            // backgroundColor: "yellow",
-            width: "80%",
-          }}
-        >
-          <ul id="MAIN1" style={{ listStyleType: "none", padding: 0 }}>
-            {mainNews &&
-              mainNews
-                .filter((article, index) => article.image_url && index < 2)
+    <div className="grid mt-40 grid-cols-4 gap-8 mx-20">
+      {/* Left Side */}
+      <div className="col-span-1 flex flex-col w-full px-20 ">
+        <ul className="list-none p-0">
+          <h2 className="px-20">Todays picks</h2>
+          {techNews &&
+            techNews
+              .filter((article, index) => article.image_url && index < 2)
+              .map((article, index) => (
+                <li
+                  key={article.article_id}
+                  className="flex flex-col w-3/5 mb-4"
+                >
+                  <div>
+                    {index === 0 || index === 1 ? (
+                      <img
+                        className="h-200 w-full"
+                        src={article.image_url}
+                        alt=""
+                      />
+                    ) : null}
+                    <Link
+                      className="no-underline"
+                      href={`/article/${article.article_id}`}
+                      passHref
+                    >
+                      <h2 className="text-black dark:text-white text-base no-underline">
+                        {article.title}
+                      </h2>
+                    </Link>
+                  </div>
+                </li>
+              ))}
+        </ul>
+      </div>
+
+      {/* Main News (Center) */}
+      {/* MAIN1 Section */}
+      <div className="col-span-2 flex flex-col justify-center items-center w-full">
+        <ul className="flex flex-col items-center w-full">
+          {topNews &&
+            topNews
+              .filter((article, index) => article.image_url && index < 1)
+              .map((article, index) => (
+                <div key={article.article_id} className="mb-4">
+                  <div>
+                    {article.image_url && (
+                      <img
+                        className="h-400 w-full"
+                        src={article.image_url}
+                        alt=""
+                      />
+                    )}
+                    <Link href={`/article/${article.article_id}`} passHref>
+                      <h2 className="text-black dark:text-white text-base no-underline">
+                        {article.title}
+                      </h2>
+                    </Link>
+                  </div>
+                </div>
+              ))}
+        </ul>
+      </div>
+
+      {/* Right Side */}
+      <div className="col-span-1 flex justify-center w-full">
+        <ul className="list-none p-0">
+          <h2 className="px-20">Latest</h2>
+          {politicsNews &&
+            politicsNews
+              .filter((article, index) => article.image_url && index < 7)
+              .map((article, index) => (
+                <li
+                  key={article.article_id}
+                  className="flex flex-col w-3/5  mb-4 px-20"
+                >
+                  {/* <div>
+                    {index === 0 || index === 1 ? (
+                      <img
+                        className="h-200 w-full"
+                        src={article.image_url}
+                        alt=""
+                      />
+                    ) : null}
+                  </div> */}
+                  <Link href={`/article/${article.article_id}`} passHref>
+                    <h2 className="text-black dark:text-white text-base no-underline">
+                      {article.title}
+                    </h2>
+                  </Link>
+                </li>
+              ))}
+        </ul>
+      </div>
+
+      {/* Business */}
+      <div className="col-span-4">
+        <div className="px-20">
+          <ul id="MAIN3" className="flex flex-row justify-center w-full p-0">
+            {businessNews &&
+              businessNews
+                .filter(
+                  (article, index) =>
+                    article.image_url && index >= 2 && index < 6
+                )
                 .map((article, index) => (
                   <li
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      borderBottom: index > 1 ? "0.5px solid black" : "",
-                    }}
                     key={article.article_id}
+                    className={`flex w-1/4 flex-col mb-4 ${
+                      index === 1 ? "mx-8 " : ""
+                    } ${index === 2 ? "mr-8" : ""}`}
                   >
-                    <div>
+                    <div className="flex flex-col space-y-2 mb-4">
                       {article.image_url && (
                         <img
-                          style={{
-                            height: "400px",
-                            width: "100% ",
-                          }}
+                          className="h-28 w-full object-cover"
                           src={article.image_url}
                           alt=""
                         />
                       )}
-                    </div>
-                    <Link
-                      style={{ textDecoration: "none" }}
-                      href={`/article/${article.article_id}`}
-                    >
-                      <h2
-                        className="text-black dark:text-white"
-                        style={{
-                          fontSize: "30px",
-                          // color: "black",
-                          textDecoration: "none",
-                        }}
-                      >
-                        {article.title}
-                      </h2>
-                    </Link>
-                  </li>
-                ))}
-          </ul>
-          <ul
-            id="MAIN2"
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              width: "100%",
-              padding: 0,
-            }}
-          >
-            {mainNews &&
-              mainNews
-                .filter(
-                  (article, index) =>
-                    article.image_url && index >= 2 && index < 5
-                )
-                .map((article, index) => (
-                  <li
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      borderBottom: "0.5px solid black",
-                    }}
-                    key={article.article_id}
-                  >
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                      <div>
-                        {article.image_url && (
-                          <img
-                            style={{
-                              height: "100px",
-                              width: "66%",
-                            }}
-                            src={article.image_url}
-                            alt=""
-                          />
-                        )}
-                      </div>
-                      <Link
-                        style={{ textDecoration: "none", width: "100%" }}
-                        href={`/article/${article.article_id}`}
-                      >
-                        <h2
-                          className="text-black dark:text-white"
-                          style={{
-                            fontSize: "20px",
-                            // color: "black",
-                          }}
-                        >
+                      <Link href={`/article/${article.article_id}`}>
+                        <h2 className="text-black dark:text-white text-base no-underline">
                           {article.title}
                         </h2>
                       </Link>
@@ -171,126 +196,33 @@ export default function News({ mainNews, rightSideNews, leftSideNews }) {
           </ul>
         </div>
       </div>
-
-      <div
-        style={{
-          gridColumn: "10 / span 3",
-          gridRow: "1",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <ul
-          style={{
-            textDecoration: "none",
-            // width: "100%",
-            alignItems: "center",
-            listStyleType: "none",
-            padding: 0,
-          }}
-        >
-          {rightSideNews &&
-            rightSideNews
-              .filter((article, index) => article.image_url && index < 5)
-              .map((article, index) => (
-                <li
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    // alignItems: "center",
-                    marginBottom: "10px",
-                    borderBottom: "0.5px solid black",
-                  }}
-                  key={article.article_id}
-                >
-                  <div>
-                    {index === 0 ? (
-                      <img
-                        style={{
-                          height: "200px",
-                          width: "100%",
-                        }}
-                        src={article.image_url}
-                        alt=""
-                      />
-                    ) : null}
-                  </div>
-                  <Link
-                    style={{ textDecoration: "none" }}
-                    href={`/article/${article.article_id}`}
-                  >
-                    <h2
-                      className="text-black dark:text-white"
-                      style={{
-                        fontSize: "20px",
-                        // color: "black",
-                        textDecoration: "none",
-                      }}
-                    >
-                      {article.title}
-                    </h2>
-                  </Link>
-                </li>
-              ))}
-        </ul>
-      </div>
-      <div
-        style={{
-          gridColumn: "1 / span 3",
-          gridRow: "1",
-          display: "flex",
-          flexDirection: "column",
-
-          alignItems: "flex-start",
-          paddingRight: "20px",
-          paddingLeft: "20px",
-          // backgroundColor: "red",
-        }}
-      >
-        <ul style={{ listStyleType: "none", padding: 0 }}>
-          {leftSideNews &&
-            leftSideNews
-              .filter((article, index) => article.image_url && index < 2)
-              .map((article, index) => (
-                <li
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    borderBottom: "0.5px solid black",
-                    // alignItems: "start",
-                  }}
-                  key={article.article_id}
-                >
-                  <div>
-                    {index === 0 || index === 1 ? (
-                      <img
-                        style={{
-                          height: "200px",
-                          width: "100%",
-                        }}
-                        src={article.image_url}
-                        alt=""
-                      />
-                    ) : null}
-                  </div>
-                  <Link
-                    style={{ textDecoration: "none" }}
-                    href={`/article/${article.article_id}`}
-                  >
-                    <h2
-                      className="text-black dark:text-white"
-                      style={{
-                        fontSize: "20px",
-                        // color: "black",
-                        textDecoration: "none",
-                      }}
-                    >
-                      {article.title}
-                    </h2>
-                  </Link>
-                </li>
-              ))}
-        </ul>
+      {/* Lifestyle */}
+      <div className="col-span-4">
+        <div className="px-20">
+          <ul id="MAIN3" className="flex flex-row justify-center w-full p-0">
+            {techNews &&
+              techNews
+                .filter((article, index) => article.image_url && index === 0)
+                .map((article, index) => (
+                  <li key={article.article_id} className="flex flex-row mb-4">
+                    <div>
+                      {article.image_url && (
+                        <img
+                          className="h-200 w-3/4 object-cover"
+                          src={article.image_url}
+                          alt=""
+                        />
+                      )}
+                    </div>
+                    <Link href={`/article/${article.article_id}`}>
+                      <h2 className="text-black dark:text-white text-base no-underline">
+                        {article.title}
+                      </h2>
+                    </Link>
+                  </li>
+                ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
