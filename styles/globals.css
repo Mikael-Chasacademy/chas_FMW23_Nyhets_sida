@@ -5,6 +5,7 @@
 
 root {
   min-width: 459px; /* check _app.js for light/dark-mode colors on the root-element */
+  font-family: system-ui;
 }
 
 body {
