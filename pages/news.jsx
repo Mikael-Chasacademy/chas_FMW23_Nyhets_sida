@@ -66,9 +66,9 @@ export default function News({
   console.log(businessNews);
 
   return (
-    <div className="grid mt-40 grid-cols-4 gap-8">
+    <div className="grid mt-40 grid-cols-4 gap-8 mx-20">
       {/* Left Side */}
-      <div className="col-span-1 flex flex-col w-full px-20">
+      <div className="col-span-1 flex flex-col w-full px-20 ">
         <ul className="list-none p-0">
           <h2 className="px-20">Todays picks</h2>
           {techNews &&
