@@ -13,9 +13,9 @@ body {
 
 h2 {
   font-family: "Bebas Neue", sans-serif;
+  //font-weight: 400;
+  font-style: normal;
 }
-
-
 
 .topButton {
   display: flex;
@@ -49,9 +49,8 @@ li {
 }
 
 .bookmark-btn {
-border-radius: 10px;
-padding: 10px;
-
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .bookmark-btn:hover {
