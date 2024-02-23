@@ -9,7 +9,7 @@ export default function Footer() {
     <div className="bg-gray-950 w-full text-slate-100">
       <div className="custom-thin-border-bottom flex flex-col justify-center items-center px-60 py-12">
         <h2 className="text-slate-300">CHAS NEWS</h2>
-        <p className="text-slate-300">
+        <p className="text-slate-300 text-center">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut ipsam
           itaque quo iusto rem rerum aspernatur dolorum est. Maxime alias natus
           illum saepe repudiandae doloremque et dicta distinctio quaerat
