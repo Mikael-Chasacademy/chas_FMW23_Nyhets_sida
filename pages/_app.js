@@ -8,6 +8,7 @@ import ThemeButton from "@/components/ThemeButton";
 import ScrollToTop from "@/ScrollToTopButton";
 import { Inter } from "next/font/google";
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 function MyApp({ Component, pageProps }) {
@@ -41,7 +42,7 @@ function MyApp({ Component, pageProps }) {
     <BookMarkProvider>
       {/* top bar shown on all sites */}
       <div
-        className={`${inter.className} flex justify-between p-3 bg-[#eeeff2ed] dark:bg-[#1A1C21] custom-thin-border-bottom `}
+        className={`${inter.className} flex  justify-between p-3 bg-[#eeeff2ed] dark:bg-[#1A1C21] custom-thin-border-bottom `}
       >
         <div className="flex ">
           <ScrollToTop />
@@ -52,7 +53,7 @@ function MyApp({ Component, pageProps }) {
           <div className="flex gap-3 items-center mx-20">
             <Link
               className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
-              href={"news"}
+              href={"/"}
             >
               Home
             </Link>{" "}
@@ -69,7 +70,7 @@ function MyApp({ Component, pageProps }) {
               Technology
             </Link>{" "}
             <Link
-              className="text-decoration-line:none no-underline text-black dark:text-white"
+              className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
               href={"/sports"}
             >
               Sports
@@ -85,7 +86,8 @@ function MyApp({ Component, pageProps }) {
             {/* <Link href={"PoliticsTaBort"}>Politics</Link> */}{" "}
           </div>
         </div>
-        <ThemeButton></ThemeButton>
+        <button className="h-9 w-20 bg-sky-700">Subscribe</button>
+        <ThemeButton />
       </div>
 
       <Component {...pageProps} />
