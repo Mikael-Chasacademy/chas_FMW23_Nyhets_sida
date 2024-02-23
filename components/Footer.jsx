@@ -34,7 +34,61 @@ export default function Footer() {
           </Link>{" "}
           <Link
             className="decoration-none no-underline text-slate-500"
-            href={"/business"}
+            href={"/sports"}
+          >
+            Sports
+          </Link>{" "}
+          <Link
+            className="decoration-none no-underline text-slate-500"
+            href={"/technology"}
+          >
+            Technology
+          </Link>{" "}
+        </div>
+        <div className="flex flex-col">
+          <h3 className="text-slate-300">Categories</h3>
+          <Link
+            className="decoration-none no-underline text-slate-500"
+            href={"/"}
+          >
+            Home
+          </Link>
+          <Link
+            className="decoration-none no-underline text-slate-500"
+            href={"/politics"}
+          >
+            Politics
+          </Link>{" "}
+          <Link
+            className="decoration-none no-underline text-slate-500"
+            href={"/sports"}
+          >
+            Sports
+          </Link>{" "}
+          <Link
+            className="decoration-none no-underline text-slate-500"
+            href={"/technology"}
+          >
+            Technology
+          </Link>{" "}
+        </div>
+        <div className="flex flex-col">
+          <h3 className="text-slate-300">Categories</h3>
+          <Link
+            className="decoration-none no-underline text-slate-500"
+            href={"/"}
+          >
+            Home
+          </Link>
+          <Link
+            className="decoration-none no-underline text-slate-500"
+            href={"/politics"}
+          >
+            Sports
+          </Link>{" "}
+          <Link
+            className="decoration-none no-underline text-slate-500"
+            href={"/sports"}
           >
             Business
           </Link>{" "}
@@ -63,65 +117,11 @@ export default function Footer() {
             className="decoration-none no-underline text-slate-500"
             href={"/business"}
           >
-            Business
+            Sports
           </Link>{" "}
           <Link
             className="decoration-none no-underline text-slate-500"
-            href={"/technology"}
-          >
-            Technology
-          </Link>{" "}
-        </div>
-        <div className="flex flex-col">
-          <h3 className="text-slate-300">Categories</h3>
-          <Link
-            className="decoration-none no-underline text-slate-500"
-            href={"/"}
-          >
-            Home
-          </Link>
-          <Link
-            className="decoration-none no-underline text-slate-500"
-            href={"/politics"}
-          >
-            Politics
-          </Link>{" "}
-          <Link
-            className="decoration-none no-underline text-slate-500"
-            href={"/business"}
-          >
-            Business
-          </Link>{" "}
-          <Link
-            className="decoration-none no-underline text-slate-500"
-            href={"/technology"}
-          >
-            Technology
-          </Link>{" "}
-        </div>
-        <div className="flex flex-col">
-          <h3 className="text-slate-300">Categories</h3>
-          <Link
-            className="decoration-none no-underline text-slate-500"
-            href={"/"}
-          >
-            Home
-          </Link>
-          <Link
-            className="decoration-none no-underline text-slate-500"
-            href={"/politics"}
-          >
-            Politics
-          </Link>{" "}
-          <Link
-            className="decoration-none no-underline text-slate-500"
-            href={"/business"}
-          >
-            Business
-          </Link>{" "}
-          <Link
-            className="decoration-none no-underline text-slate-500"
-            href={"/technology"}
+            href={"/sports"}
           >
             Technology
           </Link>{" "}
@@ -136,7 +136,7 @@ export default function Footer() {
           used, except with the prior written permission of Condé Nast. Ad
           Choices
         </p>
-        <div flex>
+        <div className="flex justify-center justify-items-center content-center align-middle" >
           <FacebookIcon />
           <TiktokIcon />
           <YouTubeIcon />
