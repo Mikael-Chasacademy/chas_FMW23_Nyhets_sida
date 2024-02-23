@@ -41,7 +41,7 @@ export default function Navbar() {
             className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
             href={"BookMarks"}
           >
-            Your saved articles
+            Saved
           </Link>
         </div>
         <SubscribeButton />
