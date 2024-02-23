@@ -1,5 +1,5 @@
+import Navbar from "@/components/Navbar";
 import Subscribe from "@/components/Subscribe";
-import SubscribeButton from "@/components/SubscribeButton";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -9,7 +9,7 @@ const myAPI_KEY2 = "pub_38735da2aedac9ef5783c66faf622ffdeaa00";
 export async function getStaticProps() {
   const fetchNews = async (category) => {
     const res = await fetch(
-      `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=se&language=sv&category=${category}`
+      `https://newsdata.io/api/1/news?apikey=${myAPI_KEY2}&country=se&language=sv&category=${category}`
     );
     const data = await res.json();
     return data.results;
@@ -318,6 +318,7 @@ export default function News({
           </ul>
         </div>
       </div>
+      <Navbar />
       <Subscribe />
     </>
   );
