@@ -9,7 +9,7 @@ const myAPI_KEY2 = "pub_38212009a3be96a451d7fcf4ba5478438a924";
 export async function getStaticProps() {
   const fetchNews = async (category) => {
     const res = await fetch(
-      `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=us&language=en&category=${category}`
+      `https://newsdata.io/api/1/news?apikey=${myAPI_KEY2}&country=us&language=en&category=${category}`
     );
     const data = await res.json();
     return data.results;
@@ -152,7 +152,6 @@ export default function News({
                         {article.title}
                       </h2>
                     </Link>
-                    <p>{article.creator}</p>
                   </li>
                 ))}
           </ul>
