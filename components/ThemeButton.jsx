@@ -9,7 +9,7 @@ export default function ThemeButton() {
     <>
       {state.userPreferences.theme === "light" ? (
         <button
-          className="border-none rounded-full bg-gray-600"
+          className="border-none rounded-full bg-gray-600 hover:cursor-pointer"
           onClick={() => {
             dispatch({
               type: "changed_theme",
@@ -50,7 +50,7 @@ export default function ThemeButton() {
         </button>
       ) : (
         <button
-          className="bg-inherit border-none rounded-full bg-slate-300"
+          className="bg-inherit border-none rounded-full bg-slate-300 hover:cursor-pointer"
           onClick={() => {
             dispatch({
               type: "changed_theme",

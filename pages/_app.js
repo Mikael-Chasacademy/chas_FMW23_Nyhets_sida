@@ -80,7 +80,7 @@ function MyApp({ Component, pageProps }) {
                 className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
                 href={"BookMarks"}
               >
-                Your saved articles
+                Bookmarks
               </Link>
             </div>
             {/* <Link href={"PoliticsTaBort"}>Politics</Link> */}{" "}
