@@ -8,13 +8,7 @@ import Subscribe from "@/components/Subscribe";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const myAPI_KEY = "pub_38716b7bf0044c9fdc848bc0cc7a750ac7c24"; // 200 hämtningar per dag?
-
-/* export async function getStaticPaths() {
-  const categories = ["politics", "technology", "pizza"]; // Add more categories as needed
-  const paths = categories.map(category => ({ params: { category: category } }));
-  return { paths, fallback: false };
-} */
+const myAPI_KEY = "pub_387160e3aa10f141258ac989c4095bffb6ec6"; // 200 hämtningar per dag?
 
 export async function getStaticProps() {
  
