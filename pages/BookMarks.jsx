@@ -4,7 +4,7 @@ import Link from "next/link";
 import { fetchDataByCategory } from "./api";
 import Image from "next/image";
 
-const myAPI_KEY = "pub_38716b7bf0044c9fdc848bc0cc7a750ac7c24"; // 200 hämtningar per dag?
+const myAPI_KEY = "pub_38305e955fd48635fc6aea34d9011d6189f5a"; // 200 hämtningar per dag?
 
 /* export async function getStaticPaths() {
   const categories = ["politics", "technology", "pizza"]; // Add more categories as needed
