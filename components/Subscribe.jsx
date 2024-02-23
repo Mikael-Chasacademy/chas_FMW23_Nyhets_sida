@@ -1,7 +1,7 @@
 export default function Subscribe() {
   return (
     <div
-      className="col-span-4 h-96 mt-20 flex justify-center items-center p-32"
+      className="col-span-4 h-96 mt-20 flex justify-center items-center p-32 my-60"
       style={{
         backgroundImage: "url('/Blue Wallpaper Joyce.jpg')",
         backgroundSize: "cover",
