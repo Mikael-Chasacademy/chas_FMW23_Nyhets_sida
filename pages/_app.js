@@ -42,7 +42,6 @@ function MyApp({ Component, pageProps }) {
   return (
     <BookMarkProvider>
       <Navbar />
-<ThemeButton/>
       <ScrollToTop />
       <Component {...pageProps} />
       <Footer />

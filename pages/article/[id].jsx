@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
- const myAPI_KEY = "pub_387160e3aa10f141258ac989c4095bffb6ec6";
+ const myAPI_KEY = "pub_38212009a3be96a451d7fcf4ba5478438a924";
 
  export default function Article(props) {
   console.log("Article props", props);
@@ -94,11 +94,11 @@ export default function Article({ article }) {
 } */
 //##################################################################
 
-const myAPI_KEY = "pub_38305e955fd48635fc6aea34d9011d6189f5a";
+const myAPI_KEY = "pub_38212009a3be96a451d7fcf4ba5478438a924";
 //Hämtar data
 export async function getStaticPaths() {
   const topRes = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=top`
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=us&language=en&category=top`
   );
 
   const topData = await topRes.json();
@@ -110,7 +110,7 @@ export async function getStaticPaths() {
   }));
 
   const politicsRes = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=politics`
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=us&language=en&category=politics`
   );
 
   const politicsData = await politicsRes.json();
@@ -122,7 +122,7 @@ export async function getStaticPaths() {
   }));
 
   const technologyRes = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=technology`
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=us&language=en&category=technology`
   );
 
   const technologyData = await technologyRes.json();
@@ -134,7 +134,7 @@ export async function getStaticPaths() {
   }));
 
   const businessRes = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=business`
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=us&language=en&category=business`
   );
 
   const businessData = await businessRes.json();
@@ -160,7 +160,8 @@ export async function getStaticPaths() {
 //Använder Data
 export async function getStaticProps({ params }) {
   const topRes = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=top`
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=us&language=en&category=top`
+
   );
   const topData = await topRes.json();
 
@@ -171,7 +172,8 @@ export async function getStaticProps({ params }) {
   );
 
   const politicsRes = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=politics`
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=us&language=en&category=politics`
+
   );
   const politicsData = await politicsRes.json();
 
@@ -182,7 +184,7 @@ export async function getStaticProps({ params }) {
   );
 
   const technologyRes = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=technology`
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=us&language=en&category=technology`
   );
   const technologyData = await technologyRes.json();
 
@@ -193,7 +195,8 @@ export async function getStaticProps({ params }) {
   );
 
   const businessRes = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=business`
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=us&language=en&category=business`
+
   );
   const businessData = await businessRes.json();
 
