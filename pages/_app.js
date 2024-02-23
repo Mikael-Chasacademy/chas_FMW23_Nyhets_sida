@@ -7,7 +7,7 @@ import { ThemeProvider, useTheme, useThemeDispatch } from "../ThemeContext";
 import ThemeButton from "@/components/ThemeButton";
 import ScrollToTop from "@/ScrollToTopButton";
 import { Inter } from "next/font/google";
-
+import SubscribeButton from "@/components/SubscribeButton";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -44,7 +44,7 @@ function MyApp({ Component, pageProps }) {
       <div
         className={`${inter.className} flex  justify-between p-3 bg-[#eeeff2ed] dark:bg-[#1A1C21] custom-thin-border-bottom `}
       >
-        <div className="flex ">
+        <div className="flex bg-red-400">
           <ScrollToTop />
           {/* <div>
               logga?
@@ -75,18 +75,18 @@ function MyApp({ Component, pageProps }) {
             >
               Sports
             </Link>
-            <div>
-              <Link
-                className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
-                href={"BookMarks"}
-              >
-                Your saved articles
-              </Link>
-            </div>
             {/* <Link href={"PoliticsTaBort"}>Politics</Link> */}{" "}
           </div>
         </div>
-        <button className="h-9 w-20 bg-sky-700">Subscribe</button>
+        <div>
+          <Link
+            className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
+            href={"BookMarks"}
+          >
+            Your saved articles
+          </Link>
+        </div>
+        <SubscribeButton />
         <ThemeButton />
       </div>
 
