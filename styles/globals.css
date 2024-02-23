@@ -164,13 +164,15 @@ li {
 }
 
 .fade-out-text {
-  animation: fadeOut 2s forwards;
+  opacity: 1;
+  position: absolute;
+  transition: opacity 2s 3s;
+  pointer-events: none; /* Undvik att texten är klickbar */
 }
 
 @keyframes fadeOut {
   from {
     opacity: 1;
-    transition: opacity 3s;
   }
   to {
     opacity: 0;

@@ -30,13 +30,15 @@ export async function getStaticProps({ params }) {
 export default function CategoryPage({ news }) {
   const { state, dispatch } = useContext(BookMarkContext);
   const [bookmarkText, setBookmarkText] = useState("");
+  const [bookmarkAricleID, setBookmarkAricleID] = useState(null);
 
   function addBookmark(article) {
     dispatch({
       type: "add",
       id: article.article_id,
     });
-    setBookmarkText("Bookmark added to Bookmarks");
+    setBookmarkAricleID(article.article_id); // Spara artikel-ID
+    setBookmarkText("Bookmark added to Saved Articles");
     setTimeout(() => setBookmarkText(""), 2000); // Fade out after 2 seconds
   }
 
@@ -45,7 +47,8 @@ export default function CategoryPage({ news }) {
       type: "delete",
       id: article.article_id,
     });
-    setBookmarkText("Bookmark removed from Bookmarks");
+    setBookmarkAricleID(article.article_id); // Spara artikel-ID
+    setBookmarkText("Bookmark removed from Saved Articles");
     setTimeout(() => setBookmarkText(""), 2000); // Fade out after 2 seconds
   }
 
@@ -92,7 +95,7 @@ export default function CategoryPage({ news }) {
                   </button>
                 </div>
               </div>
-              {bookmarkText && (
+              {bookmarkAricleID === article.article_id && (
                 <span className="fade-out-text">{bookmarkText}</span>
               )}
             </li>
@@ -102,4 +105,3 @@ export default function CategoryPage({ news }) {
     </div>
   );
 }
-
