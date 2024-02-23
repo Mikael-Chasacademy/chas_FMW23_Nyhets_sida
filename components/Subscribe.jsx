@@ -10,7 +10,24 @@ export default function Subscribe() {
     >
       <div className="bg-slate-100 p-20 flex items-center ">
         <div className=" w-2/4 mr-7">
-          <h3 className="text-2xl font-semibold">
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 30 30"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g>
+              <path
+                d="M19 20V22L21 20H19ZM0.545974 3.37325L17.546 21.3732L20.454 18.6268L3.45403 0.626753L0.545974 3.37325ZM21 20V6.64516H17V20H21ZM19 18H5.70161V22H19V18Z"
+                fill="black"
+              ></path>
+            </g>
+            <g>
+              <path d="M0 28H28" stroke="black" stroke-width="2"></path>
+            </g>
+          </svg>
+          <h3 className="text-2xl font-semibold ">
             SIGN UP FOR THE CHAS NEWS DAILY NEWSLETTER
           </h3>
           <p className="text-sm">

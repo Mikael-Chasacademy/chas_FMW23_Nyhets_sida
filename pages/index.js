@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar";
 import Subscribe from "@/components/Subscribe";
 import Link from "next/link";
 import { useState } from "react";
@@ -8,7 +9,7 @@ const myAPI_KEY2 = "pub_38735da2aedac9ef5783c66faf622ffdeaa00";
 export async function getStaticProps() {
   const fetchNews = async (category) => {
     const res = await fetch(
-      `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=se&language=sv&category=${category}`
+      `https://newsdata.io/api/1/news?apikey=${myAPI_KEY2}&country=se&language=sv&category=${category}`
     );
     const data = await res.json();
     return data.results;
@@ -75,7 +76,7 @@ export default function News({
                     onMouseOver={() => handleMouseEnter(article.article_id)}
                     onMouseLeave={() => handleMouseLeave(article.article_id)}
                     key={article.article_id}
-                    className="flex mb-4 col-span-2"
+                    className="flex mb-4 col-span-2 hover:cursor-pointer"
                   >
                     <div>
                       {index === 0 || index === 1 ? (
@@ -91,7 +92,7 @@ export default function News({
                         passHref
                       >
                         <h2
-                          className={`$  text-black font-semibold dark:text-white text-2xl ${
+                          className={`$  text-black font-semibold dark:text-white text-4xl ${
                             hovered[article.article_id]
                               ? "underline decoration-2"
                               : "no-underline"
@@ -142,7 +143,7 @@ export default function News({
                       passHref
                     >
                       <h2
-                        className={`text-black dark:text-white text-lg ${
+                        className={`text-black dark:text-white text-lg w-full object-cover ${
                           hovered[article.article_id]
                             ? "underline decoration-2"
                             : "no-underline"
@@ -157,7 +158,7 @@ export default function News({
           </ul>
         </div>
         {/* Business */}
-        <div className="col-span-4 px-0">
+        <div className="col-span-4 px-0 flex flex-col justify-evenly">
           <div className="block mb-4 border-t-2 border-b-0 border-l-0 border-r-0 border-solid border-black dark:border-[#EEEFF2]">
             <div className="flex">
               <h3 className="bg-black dark:bg-white text-white dark:text-black p-2 m-0 text-sm">
@@ -167,7 +168,7 @@ export default function News({
           </div>
 
           {/* Removed px-20 */}
-          <ul className="flex flex-row justify-center w-full p-0">
+          <ul className="flex flex-row justify-evenly w-full p-0 flex-1">
             {businessNews &&
               businessNews
                 .filter(
@@ -179,7 +180,7 @@ export default function News({
                     onMouseOver={() => handleMouseEnter(article.article_id)}
                     onMouseLeave={() => handleMouseLeave(article.article_id)}
                     key={article.article_id}
-                    className={`flex w-1/4 flex-col mb-4 ${
+                    className={`flex w-1/4  flex-col mb-4 hover:cursor-pointer${
                       index === 1 ? "mx-8" : ""
                     } ${index === 2 ? "mr-8" : ""} ${
                       index < 3 ? "custom-thin-border-right px-8" : ""
@@ -231,7 +232,7 @@ export default function News({
                     onMouseOver={() => handleMouseEnter(article.article_id)}
                     onMouseLeave={() => handleMouseLeave(article.article_id)}
                     key={article.article_id}
-                    className="flex w-full"
+                    className="flex w-full hover:cursor-pointer"
                   >
                     {article.image_url && (
                       <img
@@ -261,7 +262,7 @@ export default function News({
                 ))}
           </ul>
         </div>
-        <div className="col-span-4 px-0">
+        <div className="col-span-4 px-0 flex flex-col">
           <div className="block mb-4 border-t-2 border-b-0 border-l-0 border-r-0 border-solid border-black dark:border-[#EEEFF2]">
             <div className="flex">
               <h3 className="bg-black dark:bg-white text-white dark:text-black p-2 m-0 text-sm">
@@ -271,7 +272,7 @@ export default function News({
           </div>
 
           {/* Removed px-20 */}
-          <ul className="flex flex-row justify-center w-full p-0">
+          <ul className="flex flex-row justify-between w-full p-0">
             {topNews &&
               topNews
                 .filter(
@@ -283,7 +284,7 @@ export default function News({
                     onMouseOver={() => handleMouseEnter(article.article_id)}
                     onMouseLeave={() => handleMouseLeave(article.article_id)}
                     key={article.article_id}
-                    className={`flex w-1/4 flex-col mb-4 ${
+                    className={`flex w-1/4 flex-col mb-4  hover:cursor-pointer${
                       index === 1 ? "mx-8" : ""
                     } ${index === 2 ? "mr-8" : ""} ${
                       index < 3 ? "custom-thin-border-right px-8" : ""
@@ -317,7 +318,8 @@ export default function News({
           </ul>
         </div>
       </div>
-      <Subscribe />;
+      <Navbar />
+      <Subscribe />
     </>
   );
 

@@ -1,5 +1,4 @@
 import { BookMarkProvider } from "@/BookMarkContext";
-// import "@/styles/globals.css";
 import "../styles/globals.css";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -8,6 +7,7 @@ import ThemeButton from "@/components/ThemeButton";
 import ScrollToTop from "@/ScrollToTopButton";
 import { Inter } from "next/font/google";
 
+import Navbar from "@/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,55 +40,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <BookMarkProvider>
-      {/* top bar shown on all sites */}
-      <div
-        className={`${inter.className} flex  justify-between p-3 bg-[#eeeff2ed] dark:bg-[#1A1C21] custom-thin-border-bottom `}
-      >
-        <div className="flex ">
-          <ScrollToTop />
-          {/* <div>
-              logga?
-            </div> */}
-
-          <div className="flex gap-3 items-center mx-20">
-            <Link
-              className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
-              href={"/"}
-            >
-              Home
-            </Link>{" "}
-            <Link
-              className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
-              href={"/politics"}
-            >
-              Politics
-            </Link>{" "}
-            <Link
-              className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
-              href={"/technology"}
-            >
-              Technology
-            </Link>{" "}
-            <Link
-              className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
-              href={"/sports"}
-            >
-              Sports
-            </Link>
-            <div>
-              <Link
-                className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
-                href={"BookMarks"}
-              >
-                Bookmarks
-              </Link>
-            </div>
-            {/* <Link href={"PoliticsTaBort"}>Politics</Link> */}{" "}
-          </div>
-        </div>
-        <button className="h-9 w-20 bg-sky-700">Subscribe</button>
-        <ThemeButton />
-      </div>
+      <Navbar />
 
       <Component {...pageProps} />
     </BookMarkProvider>
