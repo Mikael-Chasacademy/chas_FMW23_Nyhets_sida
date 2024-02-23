@@ -136,7 +136,7 @@ export default function Footer() {
           used, except with the prior written permission of Condé Nast. Ad
           Choices
         </p>
-        <div flex>
+        <div className="flex justify-center justify-items-center content-center align-middle" >
           <FacebookIcon />
           <TiktokIcon />
           <YouTubeIcon />

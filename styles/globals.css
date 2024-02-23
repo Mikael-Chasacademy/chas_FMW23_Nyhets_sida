@@ -178,3 +178,13 @@ li {
     opacity: 0;
   }
 }
+
+svg {
+}
+
+svg:hover {
+  cursor: pointer;
+  transform: scale(1.2); /* Öka storleken med 20% när man hovrar */
+  transition: transform 0.2s ease-out; /* Gör övergången smidig */
+}
+

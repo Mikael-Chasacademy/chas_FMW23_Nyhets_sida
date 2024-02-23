@@ -2,8 +2,8 @@ import Subscribe from "@/components/Subscribe";
 import Link from "next/link";
 import { useState } from "react";
 
-const myAPI_KEY = "pub_38212009a3be96a451d7fcf4ba5478438a924";
-const myAPI_KEY2 = "pub_387160e3aa10f141258ac989c4095bffb6ec6";
+const myAPI_KEY = "pub_38305e955fd48635fc6aea34d9011d6189f5a";
+const myAPI_KEY2 = "pub_38305e955fd48635fc6aea34d9011d6189f5a";
 
 export async function getStaticProps() {
   const fetchNews = async (category) => {
