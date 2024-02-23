@@ -320,7 +320,6 @@ export default function News({
       </div>
 
       <Subscribe />
-      <Footer />
     </>
   );
 
