@@ -94,7 +94,7 @@ export default function Article({ article }) {
 } */
 //##################################################################
 
-const myAPI_KEY = "pub_38212009a3be96a451d7fcf4ba5478438a924";
+const myAPI_KEY = "pub_38715851a375bfab2b1c010cd896252eb7e5b";
 //Hämtar data
 export async function getStaticPaths() {
   const topRes = await fetch(
@@ -145,12 +145,25 @@ export async function getStaticPaths() {
     params: { id: article.article_id.toString() },
   }));
 
+  const sportsRes = await fetch(
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=us&language=en&category=sports`
+  );
+
+  const sportsData = await sportsRes.json();
+
+  const sportsArticles = sportsData.results;
+
+  const sportsPaths = sportsArticles.map((article) => ({
+    params: { id: article.article_id.toString() },
+  }));
+
   return {
     paths: [
       ...topPaths,
       ...politicsPaths,
       ...technologyPaths,
       ...businessPaths,
+      ...sportsPaths,
     ],
     fallback: false,
   };
@@ -161,7 +174,6 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const topRes = await fetch(
     `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=us&language=en&category=top`
-
   );
   const topData = await topRes.json();
 
@@ -173,7 +185,6 @@ export async function getStaticProps({ params }) {
 
   const politicsRes = await fetch(
     `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=us&language=en&category=politics`
-
   );
   const politicsData = await politicsRes.json();
 
@@ -196,7 +207,6 @@ export async function getStaticProps({ params }) {
 
   const businessRes = await fetch(
     `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=us&language=en&category=business`
-
   );
   const businessData = await businessRes.json();
 
@@ -206,10 +216,25 @@ export async function getStaticProps({ params }) {
     (article) => article.article_id == params.id
   );
 
+  const sportsRes = await fetch(
+    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=us&language=en&category=sports`
+  );
+  const sportsData = await sportsRes.json();
+
+  const sportsArticles = sportsData.results;
+
+  const sportsArticle = sportsArticles.find(
+    (article) => article.article_id == params.id
+  );
+
   return {
     props: {
       article:
-        topArticle || politicsArticle || technologyArticle || businessArticle, // Use whichever article is found first
+        topArticle ||
+        politicsArticle ||
+        technologyArticle ||
+        businessArticle ||
+        sportsArticle, // Use whichever article is found first
     },
   };
 }
