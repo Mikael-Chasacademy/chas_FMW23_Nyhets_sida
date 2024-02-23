@@ -74,6 +74,7 @@ h2 {
   //font-weight: 400;
   font-style: normal;
 }
+*/
 
 .topButton {
   display: flex;
@@ -114,4 +115,64 @@ li {
 .bookmark-btn:hover {
   background-color: #3d89db;
 }
- */
+
+.bookmark-btn {
+  background-color: rgb(77, 77, 77);
+  color: white;
+  padding: 15px 32px;
+  text-decoration: none;
+  margin: 8px 2px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: background-color 0.3s ease;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  font-size: 12px;
+
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.bookmark-btn:hover {
+  background-color: #3d89db;
+}
+
+.article-list {
+  list-style: none;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.material-symbols-outlined {
+  font-size: 20px;
+}
+
+.bookmark-btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fade-out-text {
+  animation: fadeOut 2s forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transition: opacity 3s;
+  }
+  to {
+    opacity: 0;
+  }
+}

@@ -2,13 +2,13 @@ import Subscribe from "@/components/Subscribe";
 import Link from "next/link";
 import { useState } from "react";
 
-const myAPI_KEY = "pub_3826420aa772faa6db69797ad33ddda8dd802";
-const myAPI_KEY2 = "pub_3871618366750622e0e00dada303407e93ed8";
+const myAPI_KEY = "pub_38305e955fd48635fc6aea34d9011d6189f5a";
+const myAPI_KEY2 = "pub_387160e3aa10f141258ac989c4095bffb6ec6";
 
 export async function getStaticProps() {
   const fetchNews = async (category) => {
     const res = await fetch(
-      `https://newsdata.io/api/1/news?apikey=${myAPI_KEY2}&country=se&language=sv&category=${category}`
+      `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=se&language=sv&category=${category}`
     );
     const data = await res.json();
     return data.results;

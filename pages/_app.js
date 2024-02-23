@@ -8,6 +8,7 @@ import ScrollToTop from "@/ScrollToTopButton";
 import { Inter } from "next/font/google";
 
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,8 +42,10 @@ function MyApp({ Component, pageProps }) {
   return (
     <BookMarkProvider>
       <Navbar />
-
+<ThemeButton/>
+      <ScrollToTop />
       <Component {...pageProps} />
+      <Footer />
     </BookMarkProvider>
   );
 }

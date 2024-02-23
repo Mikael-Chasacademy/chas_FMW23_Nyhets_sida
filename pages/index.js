@@ -1,10 +1,10 @@
-import Navbar from "@/components/Navbar";
 import Subscribe from "@/components/Subscribe";
 import Link from "next/link";
 import { useState } from "react";
+import Footer from "@/components/Footer";
 
-const myAPI_KEY = "pub_3871618366750622e0e00dada303407e93ed8";
-const myAPI_KEY2 = "pub_3871618366750622e0e00dada303407e93ed8";
+const myAPI_KEY = "pub_38305e955fd48635fc6aea34d9011d6189f5a";
+const myAPI_KEY2 = "pub_38305e955fd48635fc6aea34d9011d6189f5a";
 
 export async function getStaticProps() {
   const fetchNews = async (category) => {
