@@ -318,7 +318,7 @@ export default function News({
           </ul>
         </div>
       </div>
-      <Navbar />
+
       <Subscribe />
     </>
   );
