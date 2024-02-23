@@ -8,7 +8,7 @@ import Subscribe from "@/components/Subscribe";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const myAPI_KEY = "pub_3871618366750622e0e00dada303407e93ed8"; // 200 hämtningar per dag?
+const myAPI_KEY = "pub_38212009a3be96a451d7fcf4ba5478438a924"; // 200 hämtningar per dag?
 
 export async function getStaticProps() {
  
