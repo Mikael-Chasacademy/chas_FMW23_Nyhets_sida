@@ -13,6 +13,10 @@ export async function getStaticProps() {
     );
     const data = await res.json();
     return data.results;
+
+    //filtrerar på artiklar som har bild
+    //const articlesWithImage = data.results.filter(
+    // (article) => article.image_url
   };
 
   const [topNews, politicsNews, techNews, businessNews] = await Promise.all([
@@ -70,7 +74,7 @@ export default function News({
 
             {techNews &&
               techNews
-                .filter((article, index) => article.image_url && index < 1)
+                .filter((article, index) => index < 1)
                 .map((article, index) => (
                   <li
                     onMouseOver={() => handleMouseEnter(article.article_id)}
@@ -82,7 +86,11 @@ export default function News({
                       {index === 0 || index === 1 ? (
                         <img
                           className="h-96 w-full object-cover"
-                          src={article.image_url}
+                          src={
+                            article.image_url
+                              ? article.image_url
+                              : "/public/Abstract HD.jpg"
+                          }
                           alt=""
                         />
                       ) : null}
@@ -111,11 +119,10 @@ export default function News({
                 ))}
           </ul>
         </div>
-        {/* Main News (Center) - Commented out for now */}
+
         {/* Right Side */}
         <div className="col-span-1 flex  w-full ">
           <ul className="list-none p-0">
-            {/* <div className="block mb-4" style={{ borderTop: "3px solid black" }}> */}
             <div className="block mb-4 border-t-2 border-b-0 border-l-0 border-r-0 border-solid border-black dark:border-[#EEEFF2]">
               <div className="flex">
                 <h3 className="bg-black dark:bg-white text-white dark:text-black p-2 m-0 text-sm">
@@ -125,7 +132,7 @@ export default function News({
             </div>
             {politicsNews &&
               politicsNews
-                .filter((article, index) => article.image_url && index < 4)
+                .filter((article, index) => index < 4)
                 .map((article, index) => (
                   <li
                     onMouseOver={() => handleMouseEnter(article.article_id)}
@@ -136,7 +143,6 @@ export default function News({
                     }`}
                   >
                     {" "}
-                    {/* Removed px-20 */}
                     <Link
                       className="no-underline"
                       href={`/article/${article.article_id}`}
@@ -170,10 +176,7 @@ export default function News({
           <ul className="flex flex-row justify-evenly w-full p-0 flex-1">
             {businessNews &&
               businessNews
-                .filter(
-                  (article, index) =>
-                    article.image_url && index >= 2 && index < 6
-                )
+                .filter((article, index) => index >= 2 && index < 6)
                 .map((article, index) => (
                   <li
                     onMouseOver={() => handleMouseEnter(article.article_id)}
@@ -189,7 +192,11 @@ export default function News({
                       {article.image_url && (
                         <img
                           className="h-28 w-full object-cover"
-                          src={article.image_url}
+                          src={
+                            article.image_url
+                              ? article.image_url
+                              : "/public/Abstract HD.jpg"
+                          }
                           alt=""
                         />
                       )}
@@ -225,7 +232,7 @@ export default function News({
           <ul className="flex justify-center w-full p-0 ">
             {politicsNews &&
               politicsNews
-                .filter((article, index) => article.image_url && index === 0)
+                .filter((article, index) => index === 0)
                 .map((article, index) => (
                   <li
                     onMouseOver={() => handleMouseEnter(article.article_id)}
@@ -236,7 +243,11 @@ export default function News({
                     {article.image_url && (
                       <img
                         className="w-full object-cover h-96"
-                        src={article.image_url}
+                        src={
+                          article.image_url
+                            ? article.image_url
+                            : "/public/Abstract HD.jpg"
+                        }
                         alt=""
                       />
                     )}
@@ -274,10 +285,7 @@ export default function News({
           <ul className="flex flex-row justify-between w-full p-0">
             {topNews &&
               topNews
-                .filter(
-                  (article, index) =>
-                    article.image_url && index >= 2 && index < 6
-                )
+                .filter((article, index) => index >= 2 && index < 6)
                 .map((article, index) => (
                   <li
                     onMouseOver={() => handleMouseEnter(article.article_id)}
@@ -293,7 +301,11 @@ export default function News({
                       {article.image_url && (
                         <img
                           className="h-28 w-full object-cover"
-                          src={article.image_url}
+                          src={
+                            article.image_url
+                              ? article.image_url
+                              : "/public/Abstract HD.jpg"
+                          }
                           alt=""
                         />
                       )}
