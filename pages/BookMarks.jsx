@@ -8,7 +8,7 @@ import Subscribe from "@/components/Subscribe";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const myAPI_KEY = "pub_38212009a3be96a451d7fcf4ba5478438a924"; // 200 hämtningar per dag?
+const myAPI_KEY = "pub_3871618366750622e0e00dada303407e93ed8"; // 200 hämtningar per dag?
 
 export async function getStaticProps() {
  
@@ -121,12 +121,14 @@ export default function BookMarks({ techNews, politicsNews, businessNews, topNew
               </button>
             </div>
             <Link className="no-underline hover:underline hover:text-black dark:hover:text-white" href={`/article/${article.article_id}`}>
-              <div className="flex gap-4 justify-start">
-                <div className="h-20 w-28 overflow-hidden">
+              <div className="flex gap-4 items-end">
+                <div className="h-20 w-28 overflow-hidden ">
                   <img className="h-full w-auto" src={article.image_url} alt="" />
                 </div>
-                            
+                <div className="flex flex-col">        
                   <h2 className="no-underline text-black dark:text-white">{article.title}</h2>
+                  <p className="text-black dark:text-white text-sm p-0 m-0">{article.creator}</p>
+                </div>  
               </div>
             </Link>
             

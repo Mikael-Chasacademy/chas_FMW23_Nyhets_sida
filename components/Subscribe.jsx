@@ -27,13 +27,13 @@ export default function Subscribe() {
               <path d="M0 28H28" stroke="black" stroke-width="2"></path>
             </g>
           </svg>
-          <h3 className="text-2xl font-semibold ">
+          <h3 className="text-2xl font-semibold text-black">
             SIGN UP FOR THE CHAS NEWS DAILY NEWSLETTER
           </h3>
-          <p className="text-sm">
+          <p className="text-sm text-black">
             Our biggest stories, delivered to your inbox every day.
           </p>
-          <a>See all stories</a>
+          <a className="text-black">See all stories</a>
         </div>
         <div className="flex flex-col  w-2/4 justify-center ">
           <div className="flex  flex-col">
@@ -47,7 +47,7 @@ export default function Subscribe() {
                 Submit
               </button>
             </div>
-            <p className="text-xs">
+            <p className="text-xs text-black">
               By signing up you agree to our User Agreement (including the class
               action waiver and arbitration provisions), our Privacy Policy &
               Cookie Statement and to receive marketing and account-related

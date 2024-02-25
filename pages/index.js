@@ -3,8 +3,8 @@ import Link from "next/link";
 import { useState } from "react";
 import Footer from "@/components/Footer";
 
-const myAPI_KEY = "pub_38212009a3be96a451d7fcf4ba5478438a924";
-const myAPI_KEY2 = "pub_38212009a3be96a451d7fcf4ba5478438a924";
+const myAPI_KEY = "pub_3871618366750622e0e00dada303407e93ed8";
+const myAPI_KEY2 = "pub_3871618366750622e0e00dada303407e93ed8";
 
 export async function getStaticProps() {
   const fetchNews = async (category) => {

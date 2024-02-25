@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
- const myAPI_KEY = "pub_38212009a3be96a451d7fcf4ba5478438a924";
+ const myAPI_KEY = "pub_3871618366750622e0e00dada303407e93ed8";
 
  export default function Article(props) {
   console.log("Article props", props);
@@ -94,7 +94,7 @@ export default function Article({ article }) {
 } */
 //##################################################################
 
-const myAPI_KEY = "pub_38212009a3be96a451d7fcf4ba5478438a924";
+const myAPI_KEY = "pub_3871618366750622e0e00dada303407e93ed8";
 //Hämtar data
 export async function getStaticPaths() {
   const topRes = await fetch(
