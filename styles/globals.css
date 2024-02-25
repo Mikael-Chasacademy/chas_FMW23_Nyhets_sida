@@ -163,12 +163,13 @@ li {
   align-items: center;
 }
 
-.fade-out-text {
+/* .fade-out-text {
   opacity: 1;
   position: absolute;
-  transition: opacity 2s 3s;
+  animation: fadeOut 2s forwards 3s;
   pointer-events: none; /* Undvik att texten är klickbar */
-}
+  /* background-color: aqua;
+} */
 
 @keyframes fadeOut {
   from {
@@ -177,10 +178,7 @@ li {
   to {
     opacity: 0;
   }
-}
-
-svg {
-}
+} */
 
 svg:hover {
   cursor: pointer;

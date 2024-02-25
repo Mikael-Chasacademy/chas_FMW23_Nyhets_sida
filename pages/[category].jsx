@@ -2,6 +2,7 @@ import Link from "next/link";
 import { fetchDataByCategory } from "./api";
 import { useContext, useState } from "react";
 import { BookMarkContext } from "@/BookMarkContext";
+import BookmarkTogglerButton from "@/components/BookmarkTogglerButton";
 
 export async function getStaticPaths() {
   // Choose which categories you want to fetch
@@ -25,10 +26,12 @@ export async function getStaticProps({ params }) {
 export default function CategoryPage({ news }) {
   const { state, dispatch } = useContext(BookMarkContext);
   const [bookmarkText, setBookmarkText] = useState("");
-  const [bookmarkAricleID, setBookmarkAricleID] = useState(null);
+  const [bookmarkAricleID, setBookmarkAricleID] = useState(false);
 
   function toggleBookmark(article) {
-    const isBookMarked = state.bookmarks.some((item) => item.id === article.article_id);
+    const isBookMarked = state.bookmarks.some(
+      (item) => item.id === article.article_id
+    );
     if (isBookMarked) {
       deleteBookmark(article);
     } else {
@@ -57,9 +60,9 @@ export default function CategoryPage({ news }) {
   }
 
   function getButtonInfo(article) {
-    const isBookmarked = 
-    Array.isArray(state) &&
-    state.bookmarks.some((item) => item.id === article.article_id);
+    const isBookmarked = state.bookmarks.some(
+      (item) => item.id === article.article_id
+    );
     const buttonText = isBookmarked ? "Remove Bookmark" : "Add Bookmark";
     const buttonIcon = isBookmarked ? "bookmark_remove" : "bookmark_added";
     return { text: buttonText, icon: buttonIcon };
@@ -68,8 +71,10 @@ export default function CategoryPage({ news }) {
   return (
     <div className="flex flex-col items-center">
       <div>
-        <h1 className="flex justify-center">
-          Category: {news.length > 0 ? news[0].category : "Unknown"} News
+      <BookmarkTogglerButton article={article} />
+
+        <h1 className="flex justify-center pb-20">
+          {news.length > 0 ? news[0].category : "Unknown"} News
         </h1>
         <ul className="article-list grid grid-cols-2 gap-4">
           {news.map((article, index) => (
