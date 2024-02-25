@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: "class",
@@ -13,10 +15,10 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
-      fontFamily: {
-        oswald: ["Oswald", "sans-serif"],
-        Anta: ["Anta", "sans-serif"], // Replace semicolon with a comma
-      },
+     /*  fontFamily: { // funkar bara om vi har med tailwinds base styles...
+        sans: ["'Inter'", ...defaultTheme.fontFamily.sans],
+        mono: ["'Bebas Neue'", ...defaultTheme.fontFamily.mono]
+      }, */
     },
   },
   plugins: [],
