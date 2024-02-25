@@ -2,6 +2,7 @@ import Link from "next/link";
 import { fetchDataByCategory } from "./api";
 import { useContext, useState } from "react";
 import { BookMarkContext } from "@/BookMarkContext";
+import { useTheme } from "@/ThemeContext";
 
 export async function getStaticPaths() {
   // Choose which categories you want to fetch
@@ -70,18 +71,26 @@ export default function CategoryPage({ news }) {
   return (
     <div className="flex flex-col items-center">
       <div>
-
-        <h1 className="flex justify-center pb-20">
-          {news.length > 0 ? news[0].category : "Unknown"} News
+        <h1 className="flex justify-center pb-20 pt-12">
+          {console.log("Category:", news.length > 0 ? news[0].category : null)}
+          <span className="bg-black text-white p-2 dark:bg-white dark:text-black">
+            {news.length > 0 &&
+            Array.isArray(news[0].category) &&
+            news[0].category.length > 0
+              ? news[0].category[0].charAt(0).toUpperCase() +
+                news[0].category[0].slice(1)
+              : "Unknown"}
+          </span>
+          <span className="mt-2"> &nbsp; News</span>
         </h1>
-        <ul className="article-list grid grid-cols-2 gap-4">
+        <ul className="article-list grid grid-cols-2 gap-4 mx-20 pb-20 p-0 m-0">
           {news.map((article, index) => (
             <li
               key={article.article_id}
               className={index === 0 ? "full-width" : ""}
             >
               <Link
-                className="text-black"
+                className="text-black no-underline hover:underline dark:text-white"
                 href={`/article/${article.article_id}`}
               >
                 <h2>{article.title}</h2>

@@ -45,7 +45,13 @@
   /* font-family: Helvetica, Arial, sans-serif;  */
   /*  font-family: system-ui;   */
   font-family: "Inter", sans-serif;
-}
+    --category-background-light: #ffffff; /* Bakgrundsfärg för kategorinamn i ljusläge */
+    --category-background-dark: #1A1C21; /* Bakgrundsfärg för kategorinamn i mörkt läge */
+    --article-title-color-light: #000000; /* Titelfärg för artiklar i ljusläge */
+    --article-title-color-dark: #ffffff; /* Titelfärg för artiklar i mörkt läge */
+  }
+  
+
 */ body {
   font-size: 1rem;
   padding: 0;
@@ -185,4 +191,11 @@ svg:hover {
   transform: scale(1.2); /* Öka storleken med 20% när man hovrar */
   transition: transform 0.2s ease-out; /* Gör övergången smidig */
 }
+
+.article-titles {
+  text-decoration: none;
+}
+
+
+
 
