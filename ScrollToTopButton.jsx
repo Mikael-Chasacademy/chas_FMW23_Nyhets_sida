@@ -3,9 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 function ScrollToTop() {
-  const [isVisible, setIsVisible] = useState(false);
-
   useEffect(() => {
+    function handleScroll() {
+      const currentScrollPos = window.scrollY;
+      const isVisible = currentScrollPos > 800;
+      setIsVisible(isVisible);
+    }
+
     window.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -13,17 +17,19 @@ function ScrollToTop() {
     };
   }, []);
 
-  function handleScroll() {
-    const currentScrollPos = window.scrollY;
-    // 800 anger hur långt ner på sidan knappen ska dyka upp, annars osynlig
-    const isVisible = currentScrollPos > 800;
-    setIsVisible(isVisible);
+  const [isVisible, setIsVisible] = useState(false);
+
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   }
 
   return (
     <div>
       {isVisible && (
-        <button className="topButton" onClick={ScrollToTop}>
+        <button className="topButton" onClick={scrollToTop}>
           <FontAwesomeIcon icon={faArrowUp} className="icon" />
         </button>
       )}
@@ -32,3 +38,4 @@ function ScrollToTop() {
 }
 
 export default ScrollToTop;
+

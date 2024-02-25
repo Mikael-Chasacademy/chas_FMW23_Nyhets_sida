@@ -2,26 +2,22 @@ import Link from "next/link";
 import { fetchDataByCategory } from "./api";
 import { useContext, useState } from "react";
 import { BookMarkContext } from "@/BookMarkContext";
+import { useTheme } from "@/ThemeContext";
 
 export async function getStaticPaths() {
-  // Här definierar du de kategorier för vilka du vill generera dynamiska rutter
+  // Choose which categories you want to fetch
   const categories = ["politics", "technology", "sports"];
-
-  // Generera sökvägar för varje kategori
+  // Make a route(path) for each category
   const paths = categories.map((category) => ({
     params: { category },
   }));
-
   return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
-  // Extrahera kategori parametern från URL:en
   const { category } = params;
-
-  // Hämta data baserat på kategorin
+  // Fetch data depending on category
   const news = await fetchDataByCategory(category);
-
   return {
     props: { news },
   };
@@ -30,13 +26,26 @@ export async function getStaticProps({ params }) {
 export default function CategoryPage({ news }) {
   const { state, dispatch } = useContext(BookMarkContext);
   const [bookmarkText, setBookmarkText] = useState("");
+  const [bookmarkAricleID, setBookmarkAricleID] = useState(false);
+
+  function toggleBookmark(article) {
+    const isBookMarked = state.bookmarks.some(
+      (item) => item.id === article.article_id
+    );
+    if (isBookMarked) {
+      deleteBookmark(article);
+    } else {
+      addBookmark(article);
+    }
+  }
 
   function addBookmark(article) {
     dispatch({
       type: "add",
       id: article.article_id,
     });
-    setBookmarkText("Bookmark added to Bookmarks");
+    setBookmarkAricleID(article.article_id); // Spara artikel-ID
+    setBookmarkText("Bookmark added to Saved Articles");
     setTimeout(() => setBookmarkText(""), 2000); // Fade out after 2 seconds
   }
 
@@ -45,24 +54,43 @@ export default function CategoryPage({ news }) {
       type: "delete",
       id: article.article_id,
     });
-    setBookmarkText("Bookmark removed from Bookmarks");
+    setBookmarkAricleID(article.article_id); // Spara artikel-ID
+    setBookmarkText("Bookmark removed from Saved Articles");
     setTimeout(() => setBookmarkText(""), 2000); // Fade out after 2 seconds
+  }
+
+  function getButtonInfo(article) {
+    const isBookmarked = state.bookmarks.some(
+      (item) => item.id === article.article_id
+    );
+    const buttonText = isBookmarked ? "Remove Bookmark" : "Add Bookmark";
+    const buttonIcon = isBookmarked ? "bookmark_remove" : "bookmark_added";
+    return { text: buttonText, icon: buttonIcon };
   }
 
   return (
     <div className="flex flex-col items-center">
       <div>
-        <h1 className="flex justify-center">
-          Category: {news.length > 0 ? news[0].category : "Unknown"} News
+        <h1 className="flex justify-center pb-20 pt-12">
+          {console.log("Category:", news.length > 0 ? news[0].category : null)}
+          <span className="bg-black text-white p-2 dark:bg-white dark:text-black">
+            {news.length > 0 &&
+            Array.isArray(news[0].category) &&
+            news[0].category.length > 0
+              ? news[0].category[0].charAt(0).toUpperCase() +
+                news[0].category[0].slice(1)
+              : "Unknown"}
+          </span>
+          <span className="mt-2"> &nbsp; News</span>
         </h1>
-        <ul className="article-list grid grid-cols-2 gap-4">
+        <ul className="article-list grid grid-cols-2 gap-4 mx-20 pb-20 p-0 m-0">
           {news.map((article, index) => (
             <li
               key={article.article_id}
               className={index === 0 ? "full-width" : ""}
             >
               <Link
-                className="text-black"
+                className="text-black no-underline hover:underline dark:text-white"
                 href={`/article/${article.article_id}`}
               >
                 <h2>{article.title}</h2>
@@ -72,27 +100,16 @@ export default function CategoryPage({ news }) {
                 <div className="bookmark-btn-wrapper">
                   <button
                     className="bookmark-btn"
-                    onClick={() => addBookmark(article)}
+                    onClick={() => toggleBookmark(article)}
                   >
                     <span className="material-symbols-outlined">
-                      bookmark_added
+                      {getButtonInfo(article).icon}
                     </span>{" "}
-                    &nbsp; Add Bookmark
-                  </button>
-                </div>
-                <div className="bookmark-btn-wrapper">
-                  <button
-                    className="bookmark-btn"
-                    onClick={() => deleteBookmark(article)}
-                  >
-                    <span className="material-symbols-outlined">
-                      bookmark_remove
-                    </span>{" "}
-                    &nbsp; Remove Bookmark
+                    &nbsp; {getButtonInfo(article).text}
                   </button>
                 </div>
               </div>
-              {bookmarkText && (
+              {bookmarkAricleID === article.article_id && (
                 <span className="fade-out-text">{bookmarkText}</span>
               )}
             </li>
@@ -102,4 +119,3 @@ export default function CategoryPage({ news }) {
     </div>
   );
 }
-

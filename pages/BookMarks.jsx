@@ -5,27 +5,26 @@ import { Inter } from "next/font/google";
 import { fetchDataByCategory } from "./api";
 import Subscribe from "@/components/Subscribe";
 
-
 const inter = Inter({ subsets: ["latin"] });
 
 const myAPI_KEY = "pub_3871618366750622e0e00dada303407e93ed8"; // 200 hämtningar per dag?
 
 export async function getStaticProps() {
- 
   // fetch all categories we use on the page so we can load in all types of bookmarks
-  const [topNews, politicsNews, techNews, businessNews, sportsNews] = await Promise.all([
-    fetchDataByCategory("top"), // from api.jsx
-    fetchDataByCategory("politics"),
-    fetchDataByCategory("technology"),
-    fetchDataByCategory("business"),
-    fetchDataByCategory("sports"),
-  ]);
+  const [topNews, politicsNews, techNews, businessNews, sportsNews] =
+    await Promise.all([
+      fetchDataByCategory("top"), // from api.jsx
+      fetchDataByCategory("politics"),
+      fetchDataByCategory("technology"),
+      fetchDataByCategory("business"),
+      fetchDataByCategory("sports"),
+    ]);
 
- /*  const res = await fetch(
+  /*  const res = await fetch(
     `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=us&language=en&category=business,politics,sports,technology,top`
   );
   const data = await res.json(); */
-/* 
+  /* 
   return {
     props: {
      news: data.results,
@@ -42,18 +41,29 @@ export async function getStaticProps() {
     },
     revalidate: 10,
   };
-  
 }
 
-export default function BookMarks({ techNews, politicsNews, businessNews, topNews, sportsNews }) {
-//export default function BookMarks({news}) {
+export default function BookMarks({
+  techNews,
+  politicsNews,
+  businessNews,
+  topNews,
+  sportsNews,
+}) {
+  //export default function BookMarks({news}) {
   const { state, dispatch } = useContext(BookMarkContext);
 
-  const combinedData = [...techNews, ...politicsNews, ...businessNews, ...topNews, ...sportsNews];
+  const combinedData = [
+    ...techNews,
+    ...politicsNews,
+    ...businessNews,
+    ...topNews,
+    ...sportsNews,
+  ];
 
   // filter the articles to those that match with our bookmark ids...
   const filteredArticles = combinedData.filter(
-    (article) => 
+    (article) =>
       state.bookmarks.find((bookmark) => bookmark.id === article.article_id) // find stops at the first match... But React.StrictMode etc can still lead to duplicates(due to running 2 times for testing purposes) so we remove duplicates after this...(?)
   );
 
@@ -84,31 +94,39 @@ export default function BookMarks({ techNews, politicsNews, businessNews, topNew
 
   function clearBookmarks() {
     dispatch({
-      type: "clear"
-    })
+      type: "clear",
+    });
   }
 
   return (
-    <div >
-   {/*  <div className={`${inter.className}`}> */}
+    <div>
+      {/*  <div className={`${inter.className}`}> */}
       {/* <p>Saved articles:</p>
       {state.bookmarks.map((bookmark) => (
         <span key={bookmark.id}> {bookmark.id}</span>
       ))} */}
       <div className="flex justify-center">
-      <h1>Saved Articles</h1>
+        <h1>Saved Articles</h1>
       </div>
-      <button className="py-2 px-4 rounded-lg border-none bg-[#1A1C21] text-white font-bold dark:bg-white dark:text-[#1A1C21] hover:cursor-pointer" onClick={() => {
-        clearBookmarks()
-      }}>Clear All Bookmarks</button>
+      <button
+        className="py-2 px-4 rounded-lg border-none bg-[#1A1C21] text-white font-bold dark:bg-white dark:text-[#1A1C21] hover:cursor-pointer"
+        onClick={() => {
+          clearBookmarks();
+        }}
+      >
+        Clear All Bookmarks
+      </button>
       <div className="flex justify-center mt-4 border-t-1 border-b-0 border-l-0 border-r-0 border-solid border-[#1A1C21] dark:border-[#EEEFF2]">
         <div className="flex">
-          <h3 className="bg-[#1A1C21] dark:bg-[#EEEFF2] text-[#EEEFF2] dark:text-[#1A1C21] p-1 m-0">Saved</h3>
+          <h3 className="bg-[#1A1C21] dark:bg-[#EEEFF2] text-[#EEEFF2] dark:text-[#1A1C21] p-1 m-0">
+            Saved
+          </h3>
         </div>
       </div>
-      
-      {articlesNoDuplicates.length > 0 ? (<ul className="grid grid-cols-1 gap-2">
-        {/* {filteredArticles.map((article) => (
+
+      {articlesNoDuplicates.length > 0 ? (
+        <ul className="grid grid-cols-1 gap-2">
+          {/* {filteredArticles.map((article) => (
           // "0.5px solid black"
           <li style={{borderBottom: "0.5px solid black"}} className="flex flex-col gap-2 p-4  " key={article.article_id}> */}
         {articlesNoDuplicates.map((article, index) => ( // using index to remove padding at the top
@@ -142,8 +160,7 @@ export default function BookMarks({ techNews, politicsNews, businessNews, topNew
         </div>
       )}
 
-
-     <Subscribe/>
+      <Subscribe />
     </div>
   );
 }

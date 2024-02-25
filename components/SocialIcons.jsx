@@ -18,8 +18,8 @@ const FacebookIcon = () => (
 const XIcon = () => (
   <svg
     focusable="false"
-    width="32"
-    height="32"
+    width="18"
+    height="18"
     viewBox="0 0 1200 1227"
     fill="white"
     xmlns="http://www.w3.org/2000/svg"
