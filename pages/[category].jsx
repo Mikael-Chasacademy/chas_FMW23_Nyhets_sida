@@ -73,7 +73,7 @@ export default function CategoryPage({ news }) {
       <div>
         <h1 className="flex justify-center pb-20 pt-12">
           {console.log("Category:", news.length > 0 ? news[0].category : null)}
-          <span className="bg-black text-white p-2 dark:bg-white dark:text-black">
+          <span className="bg-black text-white p-2 dark:bg-white dark:text-black transition-colors duration-800">
             {news.length > 0 &&
             Array.isArray(news[0].category) &&
             news[0].category.length > 0
@@ -83,7 +83,7 @@ export default function CategoryPage({ news }) {
           </span>
           <span className="mt-2"> &nbsp; News</span>
         </h1>
-        <ul className="article-list grid grid-cols-2 gap-4 mx-20 pb-20 p-0 m-0">
+        <ul className="article-list grid grid-cols-2 gap-4 mx-20 pb-20 p-0 m-0 max-w-screen-xl">
           {news.map((article, index) => (
             <li
               key={article.article_id}

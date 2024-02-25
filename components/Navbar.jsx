@@ -6,7 +6,7 @@ import ThemeButton from "./ThemeButton";
 export default function Navbar() {
   return (
     <div
-      className={`flex  justify-between items-center p-3 bg-[#eeeff2ed] dark:bg-[#1A1C21] custom-thin-border-bottom `}
+      className={`navbar flex justify-between items-center p-3 bg-[#eeeff2ed] dark:bg-[#1A1C21] custom-thin-border-bottom transition-colors duration-200`}
     >
       <div className="flex gap-3 items-center mx-20 ">
         <Link
