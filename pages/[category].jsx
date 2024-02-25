@@ -2,7 +2,6 @@ import Link from "next/link";
 import { fetchDataByCategory } from "./api";
 import { useContext, useState } from "react";
 import { BookMarkContext } from "@/BookMarkContext";
-import BookmarkTogglerButton from "@/components/BookmarkTogglerButton";
 
 export async function getStaticPaths() {
   // Choose which categories you want to fetch
@@ -71,7 +70,6 @@ export default function CategoryPage({ news }) {
   return (
     <div className="flex flex-col items-center">
       <div>
-      <BookmarkTogglerButton article={article} />
 
         <h1 className="flex justify-center pb-20">
           {news.length > 0 ? news[0].category : "Unknown"} News
