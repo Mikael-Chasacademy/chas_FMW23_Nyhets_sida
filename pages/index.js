@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 const myAPI_KEY = "pub_3871618366750622e0e00dada303407e93ed8";
-const myAPI_KEY2 = "pub_38735da2aedac9ef5783c66faf622ffdeaa00";
+const myAPI_KEY2 = "pub_387152f3af6169d536f02f6dbb1b65ca19d8b";
 
 export async function getStaticProps() {
   try {
