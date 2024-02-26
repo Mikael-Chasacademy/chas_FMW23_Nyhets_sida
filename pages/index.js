@@ -9,7 +9,7 @@ export async function getStaticProps() {
   try {
     const fetchNews = async (category) => {
       const res = await fetch(
-        `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=us&language=en&category=${category}`
+        `https://newsdata.io/api/1/news?apikey=${myAPI_KEY2}&country=us&language=en&category=${category}`
       );
 
       if (!res.ok) {
