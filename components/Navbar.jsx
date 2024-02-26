@@ -10,14 +10,16 @@ export default function Navbar() {
         className={`navbar flex justify-between items-center p-3 bg-[#eeeff2ed] dark:bg-[#1A1C21] custom-thin-border-bottom transition-colors duration-200`}
       >
         <div
-          className="flex justify-start 
-         justify-items-center content-center"
+          className="flex justify-items-center content-center"
         >
-          <div className="hidden sm:flex justify-start gap-3 items-center">
-            <div className="flex align-middle items-center">
-              <div className="flex gap-4 items-center">
+          <div className="flex gap-4 items-center">
                 <span class="material-symbols-outlined">menu</span>
-              </div>
+          </div>
+          <div className="hidden md:flex gap-3 items-center">
+            <div className="flex align-middle items-center">
+              {/* <div className="flex gap-4 items-center">
+                <span class="material-symbols-outlined">menu</span>
+              </div> */}
               <div className="ml-8 space-x-2">
                 <Link
                   className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
@@ -43,14 +45,13 @@ export default function Navbar() {
                 >
                   Sports
                 </Link>
-                {/* <Link href={"PoliticsTaBort"}>Politics</Link> */}{" "}
               </div>
             </div>
           </div>
         </div>{" "}
-        <div className="mr-6">
+        <div className="mr-6 justify-start">
           <img
-            className="flex justify-center"
+            className="flex"
             alt="WIRED"
             class="ResponsiveImageContainer-eybHBd fptoWY responsive-image__image"
             src="https://www.wired.com/verso/static/wired/assets/logo-header.svg"
@@ -62,7 +63,7 @@ export default function Navbar() {
           <div className="mx-2">
             <Link
               className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
-              href={"BookMarks"}
+              href={"/BookMarks"}
             >
               Saved
             </Link>

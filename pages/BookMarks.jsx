@@ -1,13 +1,10 @@
 import { BookMarkContext } from "@/BookMarkContext";
 import { useContext } from "react";
 import Link from "next/link";
-import { Inter } from "next/font/google";
 import { fetchDataByCategory } from "./api";
 import Subscribe from "@/components/Subscribe";
 
-const inter = Inter({ subsets: ["latin"] });
-
-const myAPI_KEY = "pub_38305e955fd48635fc6aea34d9011d6189f5a"; // 200 hämtningar per dag?
+const myAPI_KEY = "pub_3900581ff98cc657ee844badca5975b771778"; // 200 hämtningar per dag?
 
 export async function getStaticProps() {
   // fetch all categories we use on the page so we can load in all types of bookmarks

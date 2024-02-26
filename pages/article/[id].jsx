@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { BookMarkContext } from "@/BookMarkContext";
 
-const myAPI_KEY = "pub_38305e955fd48635fc6aea34d9011d6189f5a";
+const myAPI_KEY = "pub_3900581ff98cc657ee844badca5975b771778";
 //Hämtar data
 export async function getStaticPaths() {
   const topRes = await fetch(
