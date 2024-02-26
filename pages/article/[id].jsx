@@ -1,100 +1,7 @@
-/*  // variabel kommer heta 'id', drf vi gjorde [id].js ...
+import { useContext, useState } from "react";
+import { BookMarkContext } from "@/BookMarkContext";
 
- // individuell artikel sida
-
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-
- const myAPI_KEY = "pub_3871618366750622e0e00dada303407e93ed8";
-
- export default function Article(props) {
-  console.log("Article props", props);
-
-  const [article, setArticle] = useState(null);
-
-  const router = useRouter();
-  const { id } = router.query; // id är ifrån [id].jsx? 
-
-  useEffect( () => {
-    // hämtar allt igen
-    fetch (
-    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=pizza`
-    ).then(res => res.json()).then(data => {
-      const allArticles = data.results;
-      // sparar den specika artikeln
-      const article = allArticles.find(article => article.article_id == id)
-
-      setArticle(article);
-    }) 
-
-  }, [id]) 
-
-  return (
-    <div>
-      {article && ( // måste göra detta... detta körs typ en millisekund innan vi hunnit fetcha datan och då blir det error.. article är null då dvs..
-        <>
-        <h2>{article.title}</h2>
-        <img src={article.image_url} alt="" />
-        </>
-      )}
-    </div>
-  )
- } */
-
-//##################################################################
-/* const myAPI_KEY = "pub_38715d0b453471050f31a7ef0c5d7a37e385e";
-//Hämtar data
-export async function getStaticPaths() {
-  const res = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=politics`
-  );
-  const data = await res.json();
-
-  const articles = data.results;
-
-  const paths = articles.map((article) => ({
-    params: { id: article.article_id },
-  }));
-
-  return { paths, fallback: false };
-}
-//Hämtar data
-
-//Använder Data
-export async function getStaticProps({ params }) {
-  const res = await fetch(
-    `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&q=politics`
-  );
-  const data = await res.json();
-
-  const articles = data.results;
-
-  const article = articles.find((article) => article.article_id == params.id);
-
-  return {
-    props: {
-      article,
-    },
-  };
-}
-//Använder Data
-
-export default function Article({ article }) {
-  return (
-    <div>
-      {article && (
-        <>
-          <h2>{article.title}</h2>
-          <img src={article.image_url} />
-        </>
-      )}
-    </div>
-  );
-} */
-//##################################################################
-
-const myAPI_KEY = "pub_38305e955fd48635fc6aea34d9011d6189f5a";
+const myAPI_KEY = "pub_387152f3af6169d536f02f6dbb1b65ca19d8b";
 //Hämtar data
 export async function getStaticPaths() {
   const topRes = await fetch(
@@ -238,16 +145,78 @@ export async function getStaticProps({ params }) {
     },
   };
 }
-
 //Använder Data
 
+//Shantis add/delete knapp
 export default function Article({ article }) {
+  //det här är den ända ändringen i hennes kod
+  const { state, dispatch } = useContext(BookMarkContext);
+  const [bookmarkText, setBookmarkText] = useState("");
+  const [bookmarkAricleID, setBookmarkAricleID] = useState(false);
+
+  function toggleBookmark(article) {
+    const isBookMarked = state.bookmarks.some(
+      (item) => item.id === article.article_id
+    );
+    if (isBookMarked) {
+      deleteBookmark(article);
+    } else {
+      addBookmark(article);
+    }
+  }
+
+  function addBookmark(article) {
+    dispatch({
+      type: "add",
+      id: article.article_id,
+    });
+    setBookmarkAricleID(article.article_id); // Spara artikel-ID
+    setBookmarkText("Bookmark added to Saved Articles");
+    setTimeout(() => setBookmarkText(""), 2000); // Fade out after 2 seconds
+  }
+
+  function deleteBookmark(article) {
+    dispatch({
+      type: "delete",
+      id: article.article_id,
+    });
+    setBookmarkAricleID(article.article_id); // Spara artikel-ID
+    setBookmarkText("Bookmark removed from Saved Articles");
+    setTimeout(() => setBookmarkText(""), 2000); // Fade out after 2 seconds
+  }
+
+  function getButtonInfo(article) {
+    const isBookmarked = state.bookmarks.some(
+      (item) => item.id === article.article_id
+    );
+    const buttonText = isBookmarked ? "Remove Bookmark" : "Add Bookmark";
+    const buttonIcon = isBookmarked ? "bookmark_remove" : "bookmark_added";
+    return { text: buttonText, icon: buttonIcon };
+  }
+  //Shantis add/delete knapp
+
   return (
     <div>
       {article && (
         <>
           <h2>{article.title}</h2>
           <img src={article.image_url} alt={article.title} />
+          <div className="btn-container">
+            <div className="bookmark-btn-wrapper">
+              <button
+                className="bookmark-btn"
+                onClick={() => toggleBookmark(article)}
+              >
+                <span className="material-symbols-outlined">
+                  {getButtonInfo(article).icon}
+                </span>{" "}
+                &nbsp; {getButtonInfo(article).text}
+              </button>
+            </div>
+          </div>
+          {bookmarkAricleID === article.article_id && (
+            <span className="fade-out-text">{bookmarkText}</span>
+          )}
           <p>{article.description}</p>
           <h3>{article.content}</h3>
         </>
