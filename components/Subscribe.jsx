@@ -8,7 +8,7 @@ export default function Subscribe() {
         backgroundPosition: "center",
       }}
     >
-      <div className="bg-slate-100 p-20 flex items-center ">
+      <div className="bg-slate-100 p-20 flex items-center justify-center">
         <div className=" w-2/4 mr-7">
           <svg
             width="30"
@@ -40,7 +40,7 @@ export default function Subscribe() {
             <div className="flex justify-start">
               <input
                 type="text"
-                className="h-10 w-72 mr-8"
+                className="h-10 w-72 mr-8 p-0"
                 placeholder="Email Address"
               />{" "}
               <button className="bg-black h-10 w-32 p-5 text-base text-slate-100 items-center flex justify-center decoration-none">
