@@ -1,40 +1,74 @@
 import Subscribe from "@/components/Subscribe";
 import Link from "next/link";
 import { useState } from "react";
-import Footer from "@/components/Footer";
 
 const myAPI_KEY = "pub_3871618366750622e0e00dada303407e93ed8";
-const myAPI_KEY2 = "pub_3871618366750622e0e00dada303407e93ed8";
+const myAPI_KEY2 = "pub_38735da2aedac9ef5783c66faf622ffdeaa00";
 
 export async function getStaticProps() {
-  const fetchNews = async (category) => {
-    const res = await fetch(
-      `https://newsdata.io/api/1/news?apikey=${myAPI_KEY2}&country=us&language=en&category=${category}`
-    );
-    const data = await res.json();
-    return data.results;
+  try {
+    const fetchNews = async (category) => {
+      const res = await fetch(
+        `https://newsdata.io/api/1/news?apikey=${myAPI_KEY2}&country=us&language=en&category=${category}`
+      );
 
-    //filtrerar på artiklar som har bild
-    //const articlesWithImage = data.results.filter(
-    // (article) => article.image_url
-  };
+      if (!res.ok) {
+        // if response is not ok
+        console.error("Error fetching data:", res.statusText);
+        return null;
+      }
 
-  const [topNews, politicsNews, techNews, businessNews] = await Promise.all([
-    fetchNews("top"),
-    fetchNews("politics"),
-    fetchNews("technology"),
-    fetchNews("business"),
-  ]);
+      const data = await res.json();
 
-  return {
-    props: {
-      topNews,
-      politicsNews,
-      techNews,
-      businessNews,
-    },
-    revalidate: 10,
-  };
+      if (
+        data.status === "error" &&
+        data.message.includes("Rate limit exceeded")
+      ) {
+        return null;
+      }
+
+      return data.results;
+    };
+
+    const [topNews, politicsNews, techNews, businessNews] = await Promise.all([
+      fetchNews("top"),
+      fetchNews("politics"),
+      fetchNews("technology"),
+      fetchNews("business"),
+    ]);
+
+    if (
+      [topNews, politicsNews, techNews, businessNews].some(
+        (news) => news === null
+      )
+    ) {
+      // if at least one category is not fetched
+      return {
+        props: {
+          error: true,
+        },
+        revalidate: 10,
+      };
+    }
+
+    return {
+      props: {
+        topNews,
+        politicsNews,
+        techNews,
+        businessNews,
+      },
+      revalidate: 10,
+    };
+  } catch (error) {
+    console.error("Unexpected error:", error);
+    return {
+      props: {
+        error: true,
+      },
+      revalidate: 10,
+    };
+  }
 }
 
 export default function News({
@@ -42,6 +76,7 @@ export default function News({
   politicsNews,
   techNews,
   businessNews,
+  error,
 }) {
   const [hovered, setIsHovered] = useState(false);
 
@@ -57,6 +92,18 @@ export default function News({
       ...prevHoveredItems,
       [articleId]: false,
     }));
+  }
+
+  console.log(businessNews);
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center p-44">
+        <h2 className="text-5xl">
+          Whoops! Something went wrong. Please try again soon!
+        </h2>
+      </div>
+    );
   }
 
   return (
@@ -89,7 +136,7 @@ export default function News({
                           src={
                             article.image_url
                               ? article.image_url
-                              : "/public/Abstract HD.jpg"
+                              : "Abstract HD.jpg"
                           }
                           alt=""
                         />
@@ -100,7 +147,7 @@ export default function News({
                         passHref
                       >
                         <h2
-                          className={`$  text-black font-semibold dark:text-white text-4xl ${
+                          className={`$  text-black font-semibold dark:text-white text-5xl ${
                             hovered[article.article_id]
                               ? "underline decoration-2"
                               : "no-underline"
@@ -193,9 +240,9 @@ export default function News({
                         <img
                           className="h-28 w-full object-cover"
                           src={
-                            article.image_url
-                              ? article.image_url
-                              : "/public/Abstract HD.jpg"
+                            !article.image_url
+                              ? "/Abstract HD.jpg"
+                              : article.image_url
                           }
                           alt=""
                         />
@@ -244,9 +291,9 @@ export default function News({
                       <img
                         className="w-full object-cover h-96"
                         src={
-                          article.image_url
+                          article.image_url !== null
                             ? article.image_url
-                            : "/public/Abstract HD.jpg"
+                            : "/Abstract HD.jpg"
                         }
                         alt=""
                       />
@@ -302,9 +349,15 @@ export default function News({
                         <img
                           className="h-28 w-full object-cover"
                           src={
-                            article.image_url
+                            article.image_url !== null
                               ? article.image_url
-                              : "/public/Abstract HD.jpg"
+                              : "/Abstract HD.jpg"
+                          }
+                          onLoad={() =>
+                            console.log(
+                              "Image loaded:",
+                              article.image_url || "/Abstract HD.jpg"
+                            )
                           }
                           alt=""
                         />

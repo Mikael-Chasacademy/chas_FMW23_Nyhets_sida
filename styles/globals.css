@@ -10,6 +10,11 @@
   font-weight: normal;
   font-style: normal;
   
+} */
+
+body {
+  /* Andra stilinställningar för body */
+  transition: background-color 3.5s ease, color 1.5s ease; /* Lägg till övergångseffekter för bakgrundsfärg och textfärg */
 }
 
 /* .font-oswald {
@@ -64,9 +69,12 @@ body {
     "SCAN" 0;
 } */
 
-h1 {
-  font-family: "Bebas Neue", sans-serif
+h1,
+h2,
+h3 {
+  font-family: "Bebas Neue", sans-serif;
 }
+
 /* 
 h1 {
   font-size: 3.75rem;
@@ -89,6 +97,7 @@ h2 {
   z-index: 99;
   width: 50px;
   height: 50px;
+  padding: 15px;
   text-align: center;
   line-height: 40px;
   cursor: pointer;
@@ -136,7 +145,6 @@ li {
   align-items: center;
   height: 30px;
   font-size: 12px;
-
 }
 
 .btn-container {
@@ -179,7 +187,7 @@ svg:hover {
   to {
     opacity: 0;
   }
-} */
+}
 
 .article-titles {
   text-decoration: none;

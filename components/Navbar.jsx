@@ -9,46 +9,54 @@ export default function Navbar() {
       <div
         className={`navbar flex justify-between items-center p-3 bg-[#eeeff2ed] dark:bg-[#1A1C21] custom-thin-border-bottom transition-colors duration-200`}
       >
-        <div className="flex justify-start">
-          <div className="flex gap-4">
-            <span class="material-symbols-outlined">menu</span>
+        <div
+          className="flex justify-start 
+         justify-items-center content-center"
+        >
+          <div className="hidden sm:flex justify-start gap-3 items-center">
+            <div className="flex align-middle items-center">
+              <div className="flex gap-4 items-center">
+                <span class="material-symbols-outlined">menu</span>
+              </div>
+              <div className="ml-8 space-x-2">
+                <Link
+                  className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
+                  href={"/"}
+                >
+                  Home
+                </Link>{" "}
+                <Link
+                  className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
+                  href={"/politics"}
+                >
+                  Politics
+                </Link>{" "}
+                <Link
+                  className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
+                  href={"/technology"}
+                >
+                  Technology
+                </Link>{" "}
+                <Link
+                  className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
+                  href={"/sports"}
+                >
+                  Sports
+                </Link>
+                {/* <Link href={"PoliticsTaBort"}>Politics</Link> */}{" "}
+              </div>
+            </div>
           </div>
-          <div className="hidden sm:flex justify-start gap-3 items-center mx-4 ">
-            <Link
-              className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
-              href={"/"}
-            >
-              Home
-            </Link>{" "}
-            <Link
-              className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
-              href={"/politics"}
-            >
-              Politics
-            </Link>{" "}
-            <Link
-              className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
-              href={"/technology"}
-            >
-              Technology
-            </Link>{" "}
-            <Link
-              className="text-decoration-line:none no-underline text-black dark:text-white hover:underline hover:text-sky-800"
-              href={"/sports"}
-            >
-              Sports
-            </Link>
-            {/* <Link href={"PoliticsTaBort"}>Politics</Link> */}{" "}
-          </div>
-          <div>
+        </div>{" "}
+        <div className="mr-6">
           <img
-              alt="WIRED"
-              class="ResponsiveImageContainer-eybHBd fptoWY responsive-image__image"
-              src="https://www.wired.com/verso/static/wired/assets/logo-header.svg"
-              srcset=""
-              sizes="100vw"
-            ></img>
-          </div>
+            className="flex justify-center"
+            alt="WIRED"
+            class="ResponsiveImageContainer-eybHBd fptoWY responsive-image__image"
+            src="https://www.wired.com/verso/static/wired/assets/logo-header.svg"
+            srcset=""
+            sizes="100vw"
+          ></img>
         </div>
         <div className="flex justify-center items-center">
           <div className="mx-2">
