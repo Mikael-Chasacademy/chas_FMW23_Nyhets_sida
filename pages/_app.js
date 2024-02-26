@@ -1,26 +1,23 @@
 import { BookMarkProvider } from "@/BookMarkContext";
 import "../styles/globals.css";
-import Link from "next/link";
+// import 'tailwindcss/tailwind.css'; // Import Tailwind CSS, same as @import "tailwindcss/base"; in globals.css... this fixes the issue with updating fonts in tailwind.config.js, but it adds a lot of default styles... 
 import { useEffect } from "react";
-import { ThemeProvider, useTheme, useThemeDispatch } from "../ThemeContext";
-import ThemeButton from "@/components/ThemeButton";
+import { ThemeProvider, useTheme } from "../ThemeContext";
 import ScrollToTop from "@/ScrollToTopButton";
 import { Inter } from "next/font/google";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Head from "next/head";
 
-const inter = Inter({ subsets: ["latin"] });
 
 function MyApp({ Component, pageProps }) {
   const { state } = useTheme();
-  /* const dispatch = useThemeDispatch(); */
 
   console.log(state);
   console.log(state.userPreferences.theme);
 
   useEffect(() => {
-    //bg-[#eeeff2ed] dark:bg-[#1A1C21]
 
     const rootEl = document.documentElement;
     if (state.userPreferences.theme === "light") {
@@ -34,13 +31,22 @@ function MyApp({ Component, pageProps }) {
     } else {
       console.log("Unknown Theme for Dark/Light mode");
     }
-    //rootEl.classList.toggle('dark'); //
 
-    //document.body.classList.add('dark');
-  }, [state.userPreferences.theme]); // toggle theme med en knapp, då togglas 'dark' ovanför!
+  }, [state.userPreferences.theme]); 
 
   return (
     <BookMarkProvider>
+      <Head>
+        <>
+          <link rel="preconnect" href="https://fonts.googleapis.com"/>
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+          <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"/>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;700;800&family=Martian+Mono:wght@400;700&display=swap"
+            rel="stylesheet"
+          />
+        </>
+      </Head>
       <Navbar />
       <ScrollToTop />
       <Component {...pageProps} />
