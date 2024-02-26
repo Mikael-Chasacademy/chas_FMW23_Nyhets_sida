@@ -99,8 +99,9 @@ export default function News({
   if (error) {
     return (
       <div className="flex justify-center items-center p-44">
-        <h2 className="text-5xl">
-          Whoops! Something went wrong. Please try again soon!
+        <h2 className="text-5xl text-center ">
+          Oh no! Seems like we hit the rate limit. <br /> Check back in a bit
+          for the headlines!
         </h2>
       </div>
     );
