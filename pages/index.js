@@ -1,10 +1,9 @@
 import Subscribe from "@/components/Subscribe";
 import Link from "next/link";
 import { useState } from "react";
-import Footer from "@/components/Footer";
 
 const myAPI_KEY = "pub_3871618366750622e0e00dada303407e93ed8";
-const myAPI_KEY2 = "pub_3871618366750622e0e00dada303407e93ed8";
+const myAPI_KEY2 = "pub_38735da2aedac9ef5783c66faf622ffdeaa00";
 
 export async function getStaticProps() {
   const fetchNews = async (category) => {
@@ -102,7 +101,7 @@ export default function News({
                         passHref
                       >
                         <h2
-                          className={`$  text-black font-semibold dark:text-white text-4xl ${
+                          className={`$  text-black font-semibold dark:text-white text-5xl ${
                             hovered[article.article_id]
                               ? "underline decoration-2"
                               : "no-underline"
