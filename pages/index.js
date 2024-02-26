@@ -97,7 +97,13 @@ export default function News({
   console.log(businessNews);
 
   if (error) {
-    return <h2>Rate limit exceeded. Please try again soon.</h2>;
+    return (
+      <div className="flex justify-center items-center p-44">
+        <h2 className="text-5xl">
+          Whoops! Something went wrong. Please try again soon!
+        </h2>
+      </div>
+    );
   }
 
   return (
