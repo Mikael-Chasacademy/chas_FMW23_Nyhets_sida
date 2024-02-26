@@ -94,7 +94,7 @@ export default function Article({ article }) {
 } */
 //##################################################################
 
-const myAPI_KEY = "pub_3871618366750622e0e00dada303407e93ed8";
+const myAPI_KEY = "pub_38305e955fd48635fc6aea34d9011d6189f5a";
 //Hämtar data
 export async function getStaticPaths() {
   const topRes = await fetch(
