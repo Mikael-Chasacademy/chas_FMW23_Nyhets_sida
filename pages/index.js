@@ -9,7 +9,7 @@ const myAPI_KEY2 = "pub_38305e955fd48635fc6aea34d9011d6189f5a";
 export async function getStaticProps() {
   const fetchNews = async (category) => {
     const res = await fetch(
-      `https://newsdata.io/api/1/news?apikey=${myAPI_KEY2}&country=us&language=en&category=${category}`
+      `https://newsdata.io/api/1/news?apikey=${myAPI_KEY}&country=us&language=en&category=${category}`
     );
     const data = await res.json();
     return data.results;
@@ -59,6 +59,8 @@ export default function News({
     }));
   }
 
+  console.log(businessNews);
+
   return (
     <>
       <div className="grid mt-10 grid-cols-4 gap-8 mx-20">
@@ -89,7 +91,7 @@ export default function News({
                           src={
                             article.image_url
                               ? article.image_url
-                              : "/public/Abstract HD.jpg"
+                              : "Abstract HD.jpg"
                           }
                           alt=""
                         />
@@ -193,9 +195,9 @@ export default function News({
                         <img
                           className="h-28 w-full object-cover"
                           src={
-                            article.image_url
-                              ? article.image_url
-                              : "/public/Abstract HD.jpg"
+                            !article.image_url
+                              ? "/Abstract HD.jpg"
+                              : article.image_url
                           }
                           alt=""
                         />
@@ -244,9 +246,9 @@ export default function News({
                       <img
                         className="w-full object-cover h-96"
                         src={
-                          article.image_url
+                          article.image_url !== null
                             ? article.image_url
-                            : "/public/Abstract HD.jpg"
+                            : "/Abstract HD.jpg"
                         }
                         alt=""
                       />
@@ -302,9 +304,15 @@ export default function News({
                         <img
                           className="h-28 w-full object-cover"
                           src={
-                            article.image_url
+                            article.image_url !== null
                               ? article.image_url
-                              : "/public/Abstract HD.jpg"
+                              : "/Abstract HD.jpg"
+                          }
+                          onLoad={() =>
+                            console.log(
+                              "Image loaded:",
+                              article.image_url || "/Abstract HD.jpg"
+                            )
                           }
                           alt=""
                         />
