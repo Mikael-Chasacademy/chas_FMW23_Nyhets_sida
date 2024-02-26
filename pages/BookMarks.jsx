@@ -7,7 +7,7 @@ import Subscribe from "@/components/Subscribe";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const myAPI_KEY = "pub_387152f3af6169d536f02f6dbb1b65ca19d8b"; // 200 hämtningar per dag?
+const myAPI_KEY = "pub_38305e955fd48635fc6aea34d9011d6189f5a"; // 200 hämtningar per dag?
 
 export async function getStaticProps() {
   // fetch all categories we use on the page so we can load in all types of bookmarks

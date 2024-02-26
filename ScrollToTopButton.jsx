@@ -6,6 +6,7 @@ function ScrollToTop() {
   useEffect(() => {
     function handleScroll() {
       const currentScrollPos = window.scrollY;
+      // 800 decides how far to scroll for the button to show up
       const isVisible = currentScrollPos > 800;
       setIsVisible(isVisible);
     }
@@ -21,6 +22,7 @@ function ScrollToTop() {
 
   function scrollToTop() {
     window.scrollTo({
+      // top 0 is the top of the page. This is where the button will take us when clicked. 
       top: 0,
       behavior: "smooth"
     });

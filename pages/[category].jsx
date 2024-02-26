@@ -2,7 +2,6 @@ import Link from "next/link";
 import { fetchDataByCategory } from "./api";
 import { useContext, useState } from "react";
 import { BookMarkContext } from "@/BookMarkContext";
-import { useTheme } from "@/ThemeContext";
 
 export async function getStaticPaths() {
   // Choose which categories you want to fetch
@@ -63,7 +62,9 @@ export default function CategoryPage({ news }) {
     const isBookmarked = state.bookmarks.some(
       (item) => item.id === article.article_id
     );
+    // Change text based on if bookmarked or not
     const buttonText = isBookmarked ? "Remove Bookmark" : "Add Bookmark";
+    // Change icon based on if bookmarked or not
     const buttonIcon = isBookmarked ? "bookmark_remove" : "bookmark_added";
     return { text: buttonText, icon: buttonIcon };
   }

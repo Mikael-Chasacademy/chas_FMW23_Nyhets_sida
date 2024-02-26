@@ -2,8 +2,8 @@ import Subscribe from "@/components/Subscribe";
 import Link from "next/link";
 import { useState } from "react";
 
-const myAPI_KEY = "pub_3871618366750622e0e00dada303407e93ed8";
-const myAPI_KEY2 = "pub_387152f3af6169d536f02f6dbb1b65ca19d8b";
+const myAPI_KEY = "pub_38305e955fd48635fc6aea34d9011d6189f5a";
+const myAPI_KEY2 = "pub_38305e955fd48635fc6aea34d9011d6189f5a";
 
 export async function getStaticProps() {
   try {

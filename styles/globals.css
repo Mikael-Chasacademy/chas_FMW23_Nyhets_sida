@@ -13,7 +13,6 @@
 } */
 
 body {
-  /* Andra stilinställningar för body */
   transition: background-color 3.5s ease, color 1.5s ease; /* Lägg till övergångseffekter för bakgrundsfärg och textfärg */
 }
 
